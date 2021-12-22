@@ -156,8 +156,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     # Selects which scale to use for each type of chord.
     def mapChordToScale(self):
         if self.mode in ['maj', 'maj7']:
+            self.ScaleLabel.setText('Major Scale')
             return 'major'
+        elif self.mode == 'dom7':
+            self.ScaleLabel.setText('Mixolydian Scale')
+            return 'mixolydian'
         else:
+            self.ScaleLabel.setText('Minor Scale')
             return 'natural_minor'
 
     # Rotates in clockwise or anti-clockwise direction.
@@ -294,6 +299,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # If in chords in key mode, set the I, ii, iii, etc. labels.
         if self.chordsInKey:
+            self.ScaleLabel.setText('')
+
             chord_index = 0
             for c in self.circle.chords():
                 # The type of chord, e.g. 'I'-chord

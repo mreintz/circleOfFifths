@@ -885,6 +885,24 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="ScaleLabel">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>600</y>
+      <width>161</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -892,7 +910,7 @@
      <x>0</x>
      <y>0</y>
      <width>674</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
