@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="images">
+    <file>note.ico</file>
+    <file>circle.png</file>
+  </qresource>
+</RCC>
