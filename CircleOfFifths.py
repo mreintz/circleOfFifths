@@ -347,7 +347,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 # The interval, e.g. "P4"
                 interval = n[0]
                 interval_on_scale = interval[1]
-                self.chordPrintLabels[int(interval_on_scale)-1].setStyleSheet(chord_colors[interval[0]])
+                if interval == 'P1':
+                    self.chordPrintLabels[int(interval_on_scale)-1].setStyleSheet(chord_colors['P1'])
+                else:
+                    self.chordPrintLabels[int(interval_on_scale)-1].setStyleSheet(chord_colors[interval[0]])
 
                 # The note, e.g. F#.
                 note = n[1]
