@@ -10,3 +10,6 @@ Can be built into a single executable binary using:
 - pyinstaller-hooks-contrib==2020.9
 
  pyinstaller --clean --onefile --windowed --icon=note.ico .\CircleOfFifths.py
+
+![Chords in key mode](/screenshot.png)
+![Notes in chord mode](/screenshot2.png)
