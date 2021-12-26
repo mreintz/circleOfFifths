@@ -3,6 +3,7 @@ import sys
 from circle import CircleOfFifths
 from musthe import *
 from circle_ui import Ui_MainWindow
+from chordprogression import progression
 
 transparent = "background-color: rgba(255, 255, 255, 0%);"
 
@@ -59,15 +60,18 @@ def translate(string):
 
 
 """class Ui(QtWidgets.QMainWindow):
+
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
+
     def __init__(self):
         super(Ui, self).__init__()
         uic.loadUi('CircleOfFifths.ui', self)"""
 
-
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
-    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons    
 
     def __init__(self, *args, obj=None, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
@@ -75,10 +79,25 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.setWindowTitle("Circle of Fifths")
         self.setWindowIcon(QtGui.QIcon(":/images/note.ico"))
-        self.setFixedSize(674, 715)        
+        self.setFixedSize(674, 736)        
 
         self.first = True
         self.chordsInKey = True
+        self.showSharps = True
+
+        self.proglabels = [
+            self.prog1,
+            self.prog2,
+            self.prog3,
+            self.prog4
+        ]
+
+        self.progchordlabels = [
+            self.chordprog1,
+            self.chordprog2,
+            self.chordprog3,
+            self.chordprog4
+        ]        
 
         self.labels = [
             self.CLabel,
@@ -140,6 +159,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.modeBox.space.connect(self.toggleMode)
 
         self.modeSlider.valueChanged.connect(self.changeCircleMode)
+        self.sharpsProgSlider.valueChanged.connect(self.sharpsOrProg)
+
+        self.modeBox.progressions.connect(self.toggleSharpsOrProg)
 
         self.c0 = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'Db', 'Ab', 'Eb', 'Bb', 'F']
 
@@ -149,9 +171,101 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.statusbar.showMessage('Click on root note.')
 
         self.modeBox.setCurrentIndex(1)
-        #self.setkey(self.key)
+        self.frameOfProgressions.hide()
+        self.setkey(self.key)
 
-        #self.show()
+
+    def updateProgressions(self):
+        majorpatterns = [
+            (
+                [0, 3, 4],
+                {
+                    0: 'I',
+                    3: 'IV',
+                    4: 'V',
+                }
+            ),
+            (
+                [0, 5, 3, 4],
+                {
+                    0: 'I',
+                    5: 'vi',
+                    3: 'IV',
+                    4: 'V',
+                }
+            ),
+            (
+                [5, 3, 0, 4],
+                {
+                    5: 'vi',
+                    0: 'I',
+                    3: 'IV',
+                    4: 'V',
+                }
+            ),
+            (
+                [0, 5, 1, 4],
+                {
+                    0: 'I',
+                    5: 'vi',
+                    1: 'ii',
+                    4: 'V',
+                }
+            )
+        ]          
+
+        minorpatterns = [
+            (
+                [0, 3, 4],
+                {
+                    0: 'i',
+                    3: 'iv',
+                    4: 'v'
+                }
+            ),
+            (
+                [0, 3, 4],
+                {
+                    0: 'i',
+                    3: 'iv',
+                    4: 'V'
+                }
+            ),
+            (
+                [0, 1, 4, 0],
+                {
+                    0: 'i',
+                    1: 'ii°',
+                    4: 'V'
+                }
+            ),
+            (
+                [0, 5, 2, 6],
+                {
+                    0: 'i',
+                    5: 'VI',
+                    2: 'III',
+                    6: 'VII'
+                }
+            )
+        ]           
+
+        for i in range(4):
+            if self.mode in ['Major', 'Lydian', 'Mixolydian', 'Ionian', 'maj']:
+                p = progression(self.key, majorpatterns[i], 'Major')
+            else:
+                p = progression(self.key, minorpatterns[i], 'natural_minor')
+            pat = ''
+            for s in p[0]:
+                pat = pat + "{0} - ".format(s)
+            pat = pat[:len(pat)-2]
+            cho = ''
+            for s in p[1]:
+                cho = cho + "{0} - ".format(s)     
+            cho = cho[:len(cho)-2]
+            self.proglabels[i].setText(pat)
+            self.progchordlabels[i].setText(cho)
+        self.modeBox.setFocus()
 
     # Selects which scale to use for each type of chord.
     def mapChordToScale(self):
@@ -191,6 +305,24 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.modeSlider.setValue(0)
         else:
             self.modeSlider.setValue(1)
+
+    def toggleSharpsOrProg(self):
+        if self.sharpsProgSlider.value() == 1:
+            self.sharpsProgSlider.setValue(0)
+        else:
+            self.sharpsProgSlider.setValue(1)
+
+    def sharpsOrProg(self):
+        if self.sharpsProgSlider.value() == 1:
+            self.showSharps = False
+            self.frameOfProgressions.show()
+            self.SharpFlatLabel.hide()
+        else:
+            self.showSharps = True
+            self.frameOfProgressions.hide()
+            self.SharpFlatLabel.show()
+
+        self.modeBox.setFocus()
 
     # Changes ths mode of the circle: chords in key or notes on chord.
     def changeCircleMode(self):
@@ -242,7 +374,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def setkey(self, key):
         if self.first:
             self.first = False
-            self.statusbar.showMessage('"m" switches between Major and Minor modes. Try space and arrow keys.', 10000)
+            self.statusbar.showMessage('"m" switches between Major and Minor modes. Try space, "p", and arrow keys.', 10000)
 
         # Set the key label in the upper left corner to the selected key.
         self.keyLabel.setText(translate(key))
@@ -376,6 +508,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     l.setStyleSheet(chord_colors[interval[0]])
 
                 i = i + 1
+
+        self.updateProgressions()
 
 app = QtWidgets.QApplication(sys.argv)
 #window = Ui()

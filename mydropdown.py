@@ -10,6 +10,7 @@ class myDropdown(QtWidgets.QComboBox):
     right = pyqtSignal()
     left = pyqtSignal()
     space = pyqtSignal()
+    progressions = pyqtSignal()
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_M:
@@ -20,6 +21,8 @@ class myDropdown(QtWidgets.QComboBox):
             self.left.emit()
         elif event.key() == QtCore.Qt.Key_Space:
             self.space.emit()
+        elif event.key() == QtCore.Qt.Key_P:
+            self.progressions.emit()
         else:
             super(myDropdown, self).keyPressEvent(event)
 
