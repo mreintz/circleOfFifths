@@ -17,5 +17,7 @@ Can be built into a single executable binary using:
  
  `pyrcc5.exe .\CircleOfFifths.qrc -o CircleOfFifths_rc.py`
  
-![Chords in key mode](/screenshot.png)
-![Notes in chord mode](/screenshot2.png)
+![Major](/screenshot3.png)
+![Minor](/screenshot4.png)
+![Chord notes](/screenshot5.png)
+![Chord progressions](/screenshot6.png)
