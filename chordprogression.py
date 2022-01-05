@@ -1,8 +1,8 @@
 from musthe import *
 
 def translate(string):
-    string=string.replace('b', '♭')
-    string=string.replace('#', '♯')
+    string=string.replace('b', '<sub>♭</sub>')
+    string=string.replace('#', '<sup>♯</sup>')
     return string
 
 def majmin(chordno, chord):
