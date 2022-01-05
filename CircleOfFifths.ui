@@ -99,7 +99,7 @@
      </font>
     </property>
     <property name="text">
-     <string>E♭</string>
+     <string>E&lt;sub&gt;♭&lt;/sub&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -120,7 +120,7 @@
      </font>
     </property>
     <property name="text">
-     <string>F♯</string>
+     <string>F&lt;sup&gt;♯&lt;/sup&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -225,7 +225,7 @@
      </font>
     </property>
     <property name="text">
-     <string>D♭</string>
+     <string>D&lt;sub&gt;♭&lt;/sub&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -246,7 +246,7 @@
      </font>
     </property>
     <property name="text">
-     <string>A♭</string>
+     <string>A&lt;sub&gt;♭&lt;/sub&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -255,7 +255,7 @@
    <widget class="myLabel" name="BbLabel">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>80</x>
       <y>180</y>
       <width>60</width>
       <height>51</height>
@@ -267,7 +267,7 @@
      </font>
     </property>
     <property name="text">
-     <string>B♭</string>
+     <string>B&lt;sub&gt;♭&lt;/sub&gt;</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -326,7 +326,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -347,7 +347,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -368,7 +368,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -381,7 +381,7 @@
    <widget class="QLabel" name="chordLabel4">
     <property name="geometry">
      <rect>
-      <x>470</x>
+      <x>460</x>
       <y>400</y>
       <width>51</width>
       <height>51</height>
@@ -389,7 +389,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -410,7 +410,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -431,7 +431,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -445,14 +445,14 @@
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>470</y>
+      <y>460</y>
       <width>51</width>
       <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -473,7 +473,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -494,7 +494,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -508,14 +508,14 @@
     <property name="geometry">
      <rect>
       <x>140</x>
-      <y>210</y>
+      <y>220</y>
       <width>51</width>
       <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -536,7 +536,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -557,7 +557,7 @@
     </property>
     <property name="font">
      <font>
-      <pointsize>14</pointsize>
+      <pointsize>12</pointsize>
      </font>
     </property>
     <property name="text">
@@ -782,7 +782,7 @@
       <widget class="QLabel" name="onechord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -797,7 +797,7 @@
       <widget class="QLabel" name="twochord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -812,7 +812,7 @@
       <widget class="QLabel" name="threechord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -827,7 +827,7 @@
       <widget class="QLabel" name="fourchord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -842,7 +842,7 @@
       <widget class="QLabel" name="fivechord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -857,7 +857,7 @@
       <widget class="QLabel" name="sixchord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -872,7 +872,7 @@
       <widget class="QLabel" name="sevenchord_2">
        <property name="font">
         <font>
-         <pointsize>14</pointsize>
+         <pointsize>12</pointsize>
         </font>
        </property>
        <property name="text">
@@ -1165,7 +1165,7 @@
      <x>0</x>
      <y>0</y>
      <width>674</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
