@@ -729,7 +729,7 @@
       <height>41</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,3,2">
+    <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,1">
      <item>
       <widget class="QLabel" name="label_2">
        <property name="font">
@@ -1129,7 +1129,7 @@
       <height>41</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="2,3,2">
+    <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="1,1,1">
      <item>
       <widget class="QLabel" name="label_3">
        <property name="font">
@@ -1169,7 +1169,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Progr</string>
+        <string>I - IV - V</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
