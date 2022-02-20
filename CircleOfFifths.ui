@@ -738,7 +738,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Chords</string>
+        <string>Key</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -769,7 +769,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Notes</string>
+        <string>Chord</string>
        </property>
        <property name="wordWrap">
         <bool>true</bool>
@@ -1185,7 +1185,7 @@
      <x>0</x>
      <y>0</y>
      <width>674</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
