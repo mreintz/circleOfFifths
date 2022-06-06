@@ -53,7 +53,9 @@ class Ui(QtWidgets.QDialog):
         self.gbButton_2.clicked.connect(lambda: self.addChord('F#m'))
         self.abButton_2.clicked.connect(lambda: self.addChord('Abm'))
         self.bbButton_2.clicked.connect(lambda: self.addChord('Bbm'))            
-        
+
+        self.setWindowTitle("Find key from chords")
+
         self.show()
         
     def addChord(self, chord):
@@ -62,14 +64,18 @@ class Ui(QtWidgets.QDialog):
         else:
             self.chords.append(chord)
         
-        self.chordLabel.setText(translate(', '.join(self.chords)))
+        #self.chordLabel.setText(translate(', '.join(self.chords)))
         self.keys = findKeyFromChords(self.chords)
         if self.chords != []:
             keystring = []
             for k in self.keys:
                 keystring.append(', '.join(k))
-            
-            self.keyLabel.setText(translate(', '.join(keystring)))
+            possible_keys = translate(', '.join(keystring)) 
+            if possible_keys == '':
+                possible_keys = 'No keys matching these chords. Try removing some.'
+            self.keyLabel.setText(possible_keys)
+        else:
+            self.keyLabel.setText('')
         
         
 if __name__ == '__main__':

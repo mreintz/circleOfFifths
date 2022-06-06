@@ -35,6 +35,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+       </property>
        <property name="text">
         <string>C</string>
        </property>
@@ -64,6 +67,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+         </property>
          <property name="text">
           <string>C♯</string>
          </property>
@@ -90,6 +96,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
          </property>
          <property name="text">
           <string>D♭</string>
@@ -120,6 +129,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+       </property>
        <property name="text">
         <string>D</string>
        </property>
@@ -149,6 +161,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+         </property>
          <property name="text">
           <string>D♯</string>
          </property>
@@ -175,6 +190,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
          </property>
          <property name="text">
           <string>E♭</string>
@@ -205,6 +223,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+       </property>
        <property name="text">
         <string>E</string>
        </property>
@@ -231,6 +252,9 @@
         <font>
          <pointsize>16</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
        </property>
        <property name="text">
         <string>F</string>
@@ -261,6 +285,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+         </property>
          <property name="text">
           <string>F♯</string>
          </property>
@@ -287,6 +314,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
          </property>
          <property name="text">
           <string>G♭</string>
@@ -317,6 +347,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+       </property>
        <property name="text">
         <string>G</string>
        </property>
@@ -346,6 +379,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+         </property>
          <property name="text">
           <string>G♯</string>
          </property>
@@ -372,6 +408,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
          </property>
          <property name="text">
           <string>A♭</string>
@@ -402,6 +441,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+       </property>
        <property name="text">
         <string>A</string>
        </property>
@@ -431,6 +473,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
+         </property>
          <property name="text">
           <string>A♯</string>
          </property>
@@ -457,6 +502,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
          </property>
          <property name="text">
           <string>B♭</string>
@@ -486,6 +534,9 @@
         <font>
          <pointsize>16</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(205, 253, 205, 80%)};</string>
        </property>
        <property name="text">
         <string>B</string>
@@ -525,6 +576,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Cm</string>
        </property>
@@ -554,6 +608,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+         </property>
          <property name="text">
           <string>C♯m</string>
          </property>
@@ -580,6 +637,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
          </property>
          <property name="text">
           <string>D♭m</string>
@@ -610,6 +670,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Dm</string>
        </property>
@@ -639,6 +702,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+         </property>
          <property name="text">
           <string>D♯m</string>
          </property>
@@ -665,6 +731,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
          </property>
          <property name="text">
           <string>E♭m</string>
@@ -695,6 +764,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Em</string>
        </property>
@@ -721,6 +793,9 @@
         <font>
          <pointsize>16</pointsize>
         </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
        </property>
        <property name="text">
         <string>Fm</string>
@@ -751,6 +826,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+         </property>
          <property name="text">
           <string>F♯m</string>
          </property>
@@ -777,6 +855,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
          </property>
          <property name="text">
           <string>G♭m</string>
@@ -807,6 +888,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Gm</string>
        </property>
@@ -836,6 +920,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+         </property>
          <property name="text">
           <string>G♯m</string>
          </property>
@@ -862,6 +949,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
          </property>
          <property name="text">
           <string>A♭m</string>
@@ -892,6 +982,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Am</string>
        </property>
@@ -921,6 +1014,9 @@
            <pointsize>16</pointsize>
           </font>
          </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+         </property>
          <property name="text">
           <string>A♯m</string>
          </property>
@@ -947,6 +1043,9 @@
           <font>
            <pointsize>16</pointsize>
           </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
          </property>
          <property name="text">
           <string>B♭m</string>
@@ -977,6 +1076,9 @@
          <pointsize>16</pointsize>
         </font>
        </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton::checked{background-color : rgba(173, 215, 229, 80%)};</string>
+       </property>
        <property name="text">
         <string>Bm</string>
        </property>
@@ -1000,11 +1102,11 @@
       <widget class="QLabel" name="chordLabel">
        <property name="font">
         <font>
-         <pointsize>20</pointsize>
+         <pointsize>16</pointsize>
         </font>
        </property>
        <property name="text">
-        <string/>
+        <string>Possible keys:</string>
        </property>
       </widget>
      </item>
@@ -1012,7 +1114,7 @@
       <widget class="QLabel" name="keyLabel">
        <property name="font">
         <font>
-         <pointsize>20</pointsize>
+         <pointsize>16</pointsize>
         </font>
        </property>
        <property name="text">
