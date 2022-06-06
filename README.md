@@ -17,7 +17,26 @@ Can be built into a single executable binary using:
  
  `pyrcc5.exe .\CircleOfFifths.qrc -o CircleOfFifths_rc.py`
  
-![Major](/screenshot3.png)
-![Minor](/screenshot4.png)
-![Chord notes](/screenshot5.png)
-![Chord progressions](/screenshot6.png)
+Chords in key of C Major
+
+![Major](/1.png)
+
+A Major - 3 sharps in key
+
+![sharps](/2.png)
+
+Modes
+
+![modes](/3.png)
+
+Notes in common chords
+
+![notes in chord](/4.png)
+
+Adom7 chord shown on Mixolydian scale
+
+![notes in chord](/5.png)
+
+Common chord progressions
+
+![Chord progressions](/6.png)
