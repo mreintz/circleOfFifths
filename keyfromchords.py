@@ -76,7 +76,8 @@ def findKeyFromChords(mychords, *args):
             elif majmin == 'major':
                 possible_keys.append(major)
             else:
-                possible_keys.append([major, minor+'m'])
+                possible_keys.append(major)
+                possible_keys.append(minor+'m')
 
         i = i + 1
         

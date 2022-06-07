@@ -3,7 +3,7 @@ from keyfromchords import findKeyFromChords
 import sys
 
 def translate(string):
-    string=string.replace('b', '♭')
+    string=string.replace('b', '<sub>♭</sub>')
     string=string.replace('#', '♯')
     return string
 
@@ -13,6 +13,7 @@ class Ui(QtWidgets.QDialog):
         uic.loadUi('keyfromchords.ui', self)
         
         self.chords = []
+        self.majorMinor = False
         
         self.cButton.clicked.connect(lambda: self.addChord('C'))
         self.dButton.clicked.connect(lambda: self.addChord('D'))
@@ -54,23 +55,32 @@ class Ui(QtWidgets.QDialog):
         self.abButton_2.clicked.connect(lambda: self.addChord('Abm'))
         self.bbButton_2.clicked.connect(lambda: self.addChord('Bbm'))            
 
+        self.majorMinorSlider.valueChanged.connect(self.majorOrMinor)
+
         self.setWindowTitle("Find key from chords")
 
         self.show()
         
+    def majorOrMinor(self):
+        if self.majorMinorSlider.value() == 0:
+            self.majorMinor = 'major'
+        elif self.majorMinorSlider.value() == 2:
+            self.majorMinor = 'minor'
+        else:
+            self.majorMinor = False
+        self.getPossibleKeys()
+
     def addChord(self, chord):
         if chord in self.chords:
             self.chords.remove(chord)
         else:
             self.chords.append(chord)
+        self.getPossibleKeys()
         
-        #self.chordLabel.setText(translate(', '.join(self.chords)))
-        self.keys = findKeyFromChords(self.chords)
+    def getPossibleKeys(self):
+        self.keys = findKeyFromChords(self.chords, self.majorMinor)
         if self.chords != []:
-            keystring = []
-            for k in self.keys:
-                keystring.append(', '.join(k))
-            possible_keys = translate(', '.join(keystring)) 
+            possible_keys = translate(', '.join(self.keys)) 
             if possible_keys == '':
                 possible_keys = 'No keys matching these chords. Try removing some.'
             self.keyLabel.setText(possible_keys)
