@@ -294,7 +294,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="SharpFlatLabel">
+   <widget class="myLabel" name="SharpFlatLabel">
     <property name="geometry">
      <rect>
       <x>300</x>
@@ -1185,7 +1185,7 @@
      <x>0</x>
      <y>0</y>
      <width>674</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

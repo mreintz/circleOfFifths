@@ -4,6 +4,7 @@ from circle import CircleOfFifths
 from musthe import *
 from circle_ui import Ui_MainWindow
 from chordprogression import progression
+from findkey import FindKeyUi
 
 transparent = "background-color: rgba(255, 255, 255, 0%);"
 
@@ -168,12 +169,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         for l in self.labels:
             l.clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.setkey(val))
 
+        self.SharpFlatLabel.clicked.connect(self.findKey)
+
         self.statusbar.showMessage('Click on root note.')
 
         self.modeBox.setCurrentIndex(1)
         self.frameOfProgressions.hide()
         self.setkey(self.key)
 
+    def findKey(self):
+        print('Ja.')
+        f = FindKeyUi()
+        f.exec_()
+        print(f.possible_keys)
 
     def updateProgressions(self):
         majorpatterns = [

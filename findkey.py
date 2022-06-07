@@ -7,9 +7,9 @@ def translate(string):
     string=string.replace('#', '♯')
     return string
 
-class Ui(QtWidgets.QDialog):
+class FindKeyUi(QtWidgets.QDialog):
     def __init__(self):
-        super(Ui, self).__init__()
+        super(FindKeyUi, self).__init__()
         uic.loadUi('keyfromchords.ui', self)
         
         self.chords = []
@@ -80,15 +80,15 @@ class Ui(QtWidgets.QDialog):
     def getPossibleKeys(self):
         self.keys = findKeyFromChords(self.chords, self.majorMinor)
         if self.chords != []:
-            possible_keys = translate(', '.join(self.keys)) 
-            if possible_keys == '':
-                possible_keys = 'No keys matching these chords. Try removing some.'
-            self.keyLabel.setText(possible_keys)
+            self.possible_keys = translate(', '.join(self.keys)) 
+            if self.possible_keys == '':
+                self.possible_keys = 'No keys matching these chords. Try removing some.'
+            self.keyLabel.setText(self.possible_keys)
         else:
             self.keyLabel.setText('')
         
         
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    window = Ui()
+    window = FindKeyUi()
     app.exec_()
