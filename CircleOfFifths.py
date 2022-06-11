@@ -178,10 +178,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setkey(self.key)
 
     def findKey(self):
-        print('Ja.')
         f = FindKeyUi()
         f.exec_()
-        print(f.possible_keys)
+        
+        try:
+            if isinstance(f.keys, str):
+                if 'm' not in f.keys:
+                    self.mode = 'Major'
+                    self.modeBox.setCurrentIndex(1)
+                    self.setkey(f.keys)
+                else:
+                    self.mode = 'Minor'
+                    self.modeBox.setCurrentIndex(5)
+                    self.setkey(f.keys.split('m')[0])
+        except AttributeError:
+            print('no keys')
 
     def updateProgressions(self):
         majorpatterns = [

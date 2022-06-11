@@ -1,6 +1,10 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from keyfromchords import findKeyFromChords
 import sys
+
+minorcolor = "QPushButton {background-color : rgba(205, 253, 205, 80%)};"
+majorcolor = "QPushButton {background-color : rgba(173, 215, 229, 80%)};"
+
 
 def translate(string):
     string=string.replace('b', '<sub>♭</sub>')
@@ -59,6 +63,8 @@ class FindKeyUi(QtWidgets.QDialog):
 
         self.setWindowTitle("Find key from chords")
 
+        self.keyButtons = []
+
         self.show()
         
     def majorOrMinor(self):
@@ -79,15 +85,45 @@ class FindKeyUi(QtWidgets.QDialog):
         
     def getPossibleKeys(self):
         self.keys = findKeyFromChords(self.chords, self.majorMinor)
-        if self.chords != []:
-            self.possible_keys = translate(', '.join(self.keys)) 
-            if self.possible_keys == '':
-                self.possible_keys = 'No keys matching these chords. Try removing some.'
-            self.keyLabel.setText(self.possible_keys)
+        if self.keyButtons != []:
+            for button in self.keyButtons:
+                self.deleteKeyButton(button)
+
+        if self.keys != []:
+            for k in self.keys:
+                self.makeKeyButton(k)
+           
+    def makeKeyButton(self, key):
+        self.keyButton = QtWidgets.QPushButton(self.widget)
+        self.keyButton.setMinimumSize(QtCore.QSize(60, 50))
+        self.keyButton.setMaximumSize(QtCore.QSize(60, 50))
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        self.keyButton.setFont(font)
+        if 'm' in key:
+            self.keyButton.setStyleSheet(minorcolor)
         else:
-            self.keyLabel.setText('')
+            self.keyButton.setStyleSheet(majorcolor)
+        self.keyButton.setCheckable(True)
+        self.keyButton.setObjectName(key+"keyButton")
+        self.keyButton.setText(key)
+        self.horizontalLayout_4.addWidget(self.keyButton)
         
+        self.keyButton.clicked.connect(lambda: self.chooseKey(key))
+        self.keyButtons.append(self.keyButton)
         
+    def chooseKey(self, key):
+        self.keys = key
+        self.close()
+
+    def deleteKeyButton(self, button):
+        try:
+            self.horizontalLayout_4.removeWidget(button)
+            button.deleteLater()
+            button = None
+        except RuntimeError:
+            pass    
+    
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     window = FindKeyUi()
