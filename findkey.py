@@ -1,6 +1,9 @@
 from PyQt5 import QtWidgets, uic, QtCore, QtGui
+from pyparsing import Diagnostics
 from keyfromchords import findKeyFromChords
 import sys
+
+from keysfromchords_ui import Ui_Dialog
 
 majorcolor = "QPushButton {background-color : rgba(205, 253, 205, 80%)};"
 minorcolor = "QPushButton {background-color : rgba(173, 215, 229, 80%)};"
@@ -11,11 +14,17 @@ def translate(string):
     string=string.replace('#', '♯')
     return string
 
-class FindKeyUi(QtWidgets.QDialog):
+"""class FindKeyUi(QtWidgets.QDialog):
     def __init__(self):
         super(FindKeyUi, self).__init__()
-        uic.loadUi('keyfromchords.ui', self)
-        
+        uic.loadUi('keyfromchords.ui', self)"""     
+
+
+class FindKeyUi(QtWidgets.QDialog, Ui_Dialog):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(FindKeyUi, self).__init__(*args, **kwargs)
+        self.setupUi(self)
+
         self.chords = []
         self.majorMinor = False
         
