@@ -179,7 +179,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def findKey(self):
         if self.chordsInKey:
+
+            px = self.geometry().x()
+            py = self.geometry().y()
             f = FindKeyUi()
+            dw = f.width()
+            dh = f.height()
+            f.setGeometry(px, py + 150, dw, dh)
             f.exec_()
             
             try:
