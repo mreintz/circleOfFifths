@@ -175,33 +175,40 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.modeBox.setCurrentIndex(1)
         self.frameOfProgressions.hide()
+
+        self.findWindow = None
         self.setkey(self.key)
 
     def findKey(self):
         if self.chordsInKey:
+            if not self.findWindow:
+                px = self.geometry().x()
+                py = self.geometry().y()
+                self.findWindow = FindKeyUi()
+                dw = self.findWindow.width()
+                dh = self.findWindow.height()
+                self.findWindow.setGeometry(px, py + 150, dw, dh)
+                self.findWindow.exec_()
+                
+                try:
+                    if isinstance(self.findWindow.keys, str):
+                        if 'm' not in self.findWindow.keys:
+                            self.mode = 'Major'
+                            self.modeBox.setCurrentIndex(1)
+                            self.setkey(self.findWindow.keys)
+                        else:
+                            self.mode = 'Minor'
+                            self.modeBox.setCurrentIndex(5)
+                            self.setkey(self.findWindow.keys.split('m')[0])
+                            
+                        self.statusbar.showMessage("Key set to {0}".format(self.findWindow.keys), 10000)
+                except AttributeError:
+                    pass
+                finally: 
+                    self.findWindow = None
 
-            px = self.geometry().x()
-            py = self.geometry().y()
-            f = FindKeyUi()
-            dw = f.width()
-            dh = f.height()
-            f.setGeometry(px, py + 150, dw, dh)
-            f.exec_()
-            
-            try:
-                if isinstance(f.keys, str):
-                    if 'm' not in f.keys:
-                        self.mode = 'Major'
-                        self.modeBox.setCurrentIndex(1)
-                        self.setkey(f.keys)
-                    else:
-                        self.mode = 'Minor'
-                        self.modeBox.setCurrentIndex(5)
-                        self.setkey(f.keys.split('m')[0])
-                        
-                    self.statusbar.showMessage("Key set to {0}".format(f.keys), 10000)
-            except AttributeError:
-                pass
+            else:
+                self.findWindow.show()
 
     def updateProgressions(self):
         majorpatterns = [
