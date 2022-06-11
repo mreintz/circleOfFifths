@@ -1,6 +1,8 @@
 # circleOfFifths
 Simple Circle of Fifths application. Works on both Windows and Linux.
 
+NEW FEATURE! Find key from chords.
+
 Requires:
 - PyQt5==5.15.1
 - musthe==1.0.0
