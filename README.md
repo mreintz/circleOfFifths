@@ -43,4 +43,7 @@ Common chord progressions
 
 Click on center to find key from chords
 
+![Find key from chords](/7.png)
+
+
 
