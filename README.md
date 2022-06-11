@@ -40,3 +40,7 @@ Adom7 chord shown on Mixolydian scale
 Common chord progressions
 
 ![Chord progressions](/6.png)
+
+Click on center to find key from chords
+
+
