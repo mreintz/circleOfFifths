@@ -20,6 +20,9 @@ def findKeyFromChords(mychords, *args):
     else:
         majmin = False
     
+    if mychords == '' or mychords == []:
+        return []
+
     sharpchords = mychords.copy()
     flatchords = mychords.copy()
     i = 0 

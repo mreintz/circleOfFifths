@@ -72,7 +72,7 @@ class CircleOfFifths():
             sig = c0_sharpstring.index(self.circlestring[0]) - mode
        
         if( sig == 0 ):
-            sigstring = ''        
+            sigstring = '♯'        
         elif( sig < 0 ):
             sigstring = str(-sig) + "b"            
         elif( sig <= 6 ):

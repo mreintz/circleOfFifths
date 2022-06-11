@@ -2,8 +2,8 @@ from PyQt5 import QtWidgets, uic, QtCore, QtGui
 from keyfromchords import findKeyFromChords
 import sys
 
-minorcolor = "QPushButton {background-color : rgba(205, 253, 205, 80%)};"
-majorcolor = "QPushButton {background-color : rgba(173, 215, 229, 80%)};"
+majorcolor = "QPushButton {background-color : rgba(205, 253, 205, 80%)};"
+minorcolor = "QPushButton {background-color : rgba(173, 215, 229, 80%)};"
 
 
 def translate(string):
@@ -94,7 +94,7 @@ class FindKeyUi(QtWidgets.QDialog):
                 self.makeKeyButton(k)
            
     def makeKeyButton(self, key):
-        self.keyButton = QtWidgets.QPushButton(self.widget)
+        self.keyButton = QtWidgets.QPushButton(self.keyWidget)
         self.keyButton.setMinimumSize(QtCore.QSize(60, 50))
         self.keyButton.setMaximumSize(QtCore.QSize(60, 50))
         font = QtGui.QFont()
