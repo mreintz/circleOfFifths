@@ -29,6 +29,7 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    ui.tuning_1.setFocus()
 
     tuning = ['E', 'A', 'D', 'G', 'B', 'E']
 
