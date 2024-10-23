@@ -25,7 +25,7 @@
     </property>
     <layout class="QGridLayout" name="gridLayout">
      <item row="4" column="0">
-      <widget class="QLineEdit" name="tuning_5">
+      <widget class="QLineEditTabReact" name="tuning_5">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -44,7 +44,7 @@
       </widget>
      </item>
      <item row="5" column="0">
-      <widget class="QLineEdit" name="tuning_6">
+      <widget class="QLineEditTabReact" name="tuning_6">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -63,7 +63,7 @@
       </widget>
      </item>
      <item row="3" column="0">
-      <widget class="QLineEdit" name="tuning_4">
+      <widget class="QLineEditTabReact" name="tuning_4">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -82,7 +82,7 @@
       </widget>
      </item>
      <item row="1" column="0">
-      <widget class="QLineEdit" name="tuning_2">
+      <widget class="QLineEditTabReact" name="tuning_2">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -101,7 +101,7 @@
       </widget>
      </item>
      <item row="0" column="0">
-      <widget class="QLineEdit" name="tuning_1">
+      <widget class="QLineEditTabReact" name="tuning_1">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -120,7 +120,7 @@
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLineEdit" name="tuning_3">
+      <widget class="QLineEditTabReact" name="tuning_3">
        <property name="minimumSize">
         <size>
          <width>40</width>
@@ -143,6 +143,21 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QLineEditTabReact</class>
+   <extends>QLineEdit</extends>
+   <header>qlineedittabreact.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>tuning_1</tabstop>
+  <tabstop>tuning_2</tabstop>
+  <tabstop>tuning_3</tabstop>
+  <tabstop>tuning_4</tabstop>
+  <tabstop>tuning_5</tabstop>
+  <tabstop>tuning_6</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
