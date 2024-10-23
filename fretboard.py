@@ -89,8 +89,8 @@ class Fretboard():
             notes_grid.append(notes_row)
             intervals_grid.append(intervals_row)
             if self.frets == (0, 24):
-                self.notes_grid = pd.DataFrame(notes_grid).values.tolist()
-                self.intervals_grid = pd.DataFrame(intervals_grid).values.tolist()
+                self.notes_grid = notes_grid
+                self.intervals_grid = intervals_grid
             else:
                 df_n = pd.DataFrame(notes_grid)
                 df_i = pd.DataFrame(intervals_grid)
