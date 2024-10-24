@@ -4,7 +4,7 @@ import pandas as pd
 class Fretboard():
     def __init__(self, tuning): 
 
-        enharmonics = [
+        self.enharmonics = [
             ['C',  'C',  'B#',  'Dbb'],
             ['C#', 'Db'              ],
             ['D',  'D',  'C##', 'Ebb'],
@@ -31,10 +31,10 @@ class Fretboard():
             index = 0
 
             # Check where on the enharmonic list we begin our one-string chromatic scale
-            for e in enharmonics:
-                if peg in enharmonics[index]:
+            for e in self.enharmonics:
+                if peg in self.enharmonics[index]:
                     # We have found our index and can build our chromatic scale
-                    all_the_notes = enharmonics[index:] + enharmonics[:index]
+                    all_the_notes = self.enharmonics[index:] + self.enharmonics[:index]
                     all_the_notes = all_the_notes + all_the_notes # 23 frets
                     all_the_notes.append(all_the_notes[0]) # 24 frets
                     self.all_the_notes[string] = all_the_notes

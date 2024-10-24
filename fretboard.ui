@@ -37,6 +37,25 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="0">
+         <widget class="QLineEditTabReact" name="tuning_2">
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>40</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="0">
          <widget class="QLineEditTabReact" name="tuning_3">
           <property name="minimumSize">
@@ -56,46 +75,8 @@
           </property>
          </widget>
         </item>
-        <item row="5" column="0">
-         <widget class="QLineEditTabReact" name="tuning_6">
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>40</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
         <item row="4" column="0">
          <widget class="QLineEditTabReact" name="tuning_5">
-          <property name="minimumSize">
-           <size>
-            <width>40</width>
-            <height>40</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>40</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0">
-         <widget class="QLineEditTabReact" name="nutButton">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -151,8 +132,8 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEditTabReact" name="tuning_2">
+        <item row="5" column="0">
+         <widget class="QLineEditTabReact" name="tuning_6">
           <property name="minimumSize">
            <size>
             <width>40</width>
@@ -182,6 +163,25 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="6" column="0">
+         <widget class="QPushButton" name="nutButton">
+          <property name="minimumSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>40</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>N</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -266,10 +266,10 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="0,0">
           <item>
-           <widget class="QComboBox" name="scaleOrChordSelector"/>
+           <widget class="QComboBox" name="rootNoteSelector"/>
           </item>
           <item>
-           <widget class="QComboBox" name="comboBox_2"/>
+           <widget class="QComboBox" name="scaleOrChordTypeSelector"/>
           </item>
          </layout>
         </item>
