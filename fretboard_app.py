@@ -66,7 +66,7 @@ def populateFretboard(ui, notes, intervals, frets):
     i = 0
     for peg in ui.tuningButtons:
         peg.setText(ui.tuning[i])
-        i = i + 1            
+        i = i + 1
 
 
 def update():
@@ -97,17 +97,21 @@ def update():
 def tuning(string):
     print(f"String {str(string)}")
     old = ui.tuning[string]
+    new = ui.tuningButtons[string].text().capitalize()
 
     match = False
     for row in ui.enharmonics:
         for note in row:
-            if ui.tuningButtons[string].text() == note:
+            if new == note:
                 match = True
-                
-    if match:
-        print(f"reverting to {old}")
-    else:
-        print(f"Changing to {ui.tuningButtons[string].text()}")
+
+    if not match:
+        ui.statusbar.showMessage(f"reverting to {old}", 10000)
+        ui.tuningButtons[string].setText(old)
+    elif old != new:
+        ui.statusbar.showMessage(f"Changing to {new}", 10000)
+        ui.tuning[string] = new
+        update()
 
 def resetFrets():
     ui.frets = (0, 24)
@@ -125,7 +129,7 @@ if __name__ == "__main__":
 
     ui.scaleOrChordTypeSelector.addItems(allScales)
 
-    ui.notesOrIntervalsSlider.valueChanged['int'].connect(update) 
+    ui.notesOrIntervalsSlider.valueChanged['int'].connect(update)
     ui.scaleOrChordSlider.valueChanged['int'].connect(update)
     ui.nutButton.clicked.connect(resetFrets)
 
@@ -134,20 +138,18 @@ if __name__ == "__main__":
     ui.scale = Scale(Note('Cb'), 'major')
 
     ui.tuningButtons = [
-        ui.tuning_1,
-        ui.tuning_2,
-        ui.tuning_3,
-        ui.tuning_4,
+        ui.tuning_6,
         ui.tuning_5,
-        ui.tuning_6
+        ui.tuning_4,
+        ui.tuning_3,
+        ui.tuning_2,
+        ui.tuning_1
     ]
 
     i = 0
     for t in ui.tuningButtons:
         t.returnPressed.connect(lambda string=i: tuning(string))
         i = i + 1
-
-    ui.tuningButtons.reverse()
 
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
