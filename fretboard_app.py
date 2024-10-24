@@ -60,6 +60,7 @@ def populateFretboard(ui, notes, intervals, frets):
             button.setText(str(fret))
             ui.gridLayout.addWidget(button, 6, j+1, 1, 1)
             ui.fretButtons.append(button)
+            button.clicked.connect(lambda state, x=fret: setFret(x))
             j = j + 1
 
     # Set up the tuning button values
@@ -68,6 +69,17 @@ def populateFretboard(ui, notes, intervals, frets):
         peg.setText(ui.tuning[i])
         i = i + 1
 
+def setFret(fret):
+    if not ui.fretSelected:
+        ui.fretSelected = True
+        ui.firstFretSelected = fret
+    else:
+        ui.fretSelected = False
+        ui.secondFretSelected = fret
+        if ui.firstFretSelected != ui.secondFretSelected:
+            ui.frets = (ui.firstFretSelected, ui.secondFretSelected)
+            ui.frets = tuple(sorted(ui.frets))
+            update()
 
 def update():
     showChord_old = ui.showChord
@@ -80,22 +92,33 @@ def update():
         if ui.showChord:
             ui.scaleOrChordTypeSelector.clear()
             ui.scaleOrChordTypeSelector.addItems(allChords)
+            type = ui.scaleOrChordTypeSelector.currentText()
+            root = ui.rootNoteSelector.currentText()
+            ui.chord = Chord(Note(root), type)
         else:
             ui.scaleOrChordTypeSelector.clear()
             ui.scaleOrChordTypeSelector.addItems(allScales)
-        return
+            type = ui.scaleOrChordTypeSelector.currentText()
+            root = ui.rootNoteSelector.currentText()
+            ui.scale = Scale(Note(root), type)
 
-    # If the note/interval slider or number of frets is changed, re-build the labels.
+    # Re-build the labels.
     for row in ui.labels:
         for label in row:
             ui.gridLayout.removeWidget(label)
 
+    for button in ui.fretButtons:
+        ui.gridLayout.removeWidget(button)
+
     f = Fretboard(ui.tuning)
-    notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
+    if ui.showChord:
+        notes, intervals = f.build(chord=ui.chord, frets=ui.frets)
+    else:
+        notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
+
     populateFretboard(ui, notes, intervals, ui.frets)
 
 def tuning(string):
-    print(f"String {str(string)}")
     old = ui.tuning[string]
     new = ui.tuningButtons[string].text().capitalize()
 
@@ -117,6 +140,25 @@ def resetFrets():
     ui.frets = (0, 24)
     update()
 
+def changeScaleOrChord():
+    try:
+        delattr(ui, chord)
+    except NameError:
+        try:
+            delattr(ui, scale)
+        except NameError:
+            pass
+
+    type = ui.scaleOrChordTypeSelector.currentText()
+    root = ui.rootNoteSelector.currentText()
+    if ui.showChord:
+        ui.chord = Chord(Note(root), type)
+        ui.statusbar.showMessage(f"{root} {type}", 10000)
+    else:
+        ui.scale = Scale(Note(root), type)
+        ui.statusbar.showMessage(f"{root} {type}", 10000)
+    update()
+
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
@@ -126,12 +168,15 @@ if __name__ == "__main__":
 
     ui.showChord = False
     ui.showInterval = False
+    ui.fretSelected = False
 
     ui.scaleOrChordTypeSelector.addItems(allScales)
 
     ui.notesOrIntervalsSlider.valueChanged['int'].connect(update)
     ui.scaleOrChordSlider.valueChanged['int'].connect(update)
     ui.nutButton.clicked.connect(resetFrets)
+    ui.rootNoteSelector.activated.connect(changeScaleOrChord)
+    ui.scaleOrChordTypeSelector.activated.connect(changeScaleOrChord)
 
     ui.tuning = ['E', 'A', 'D', 'G', 'B', 'E']
     ui.frets = (5,9)
