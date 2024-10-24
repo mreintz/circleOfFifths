@@ -71,7 +71,6 @@ def populateFretboard(ui, notes, intervals, frets):
 
 def update():
     showChord_old = ui.showChord
-    showInterval_old = ui.showInterval
 
     ui.showChord = ui.scaleOrChordSlider.value()
     ui.showInterval = ui.notesOrIntervalsSlider.value()
@@ -94,6 +93,21 @@ def update():
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
     populateFretboard(ui, notes, intervals, ui.frets)
+
+def tuning(string):
+    print(f"String {str(string)}")
+    old = ui.tuning[string]
+
+    match = False
+    for row in ui.enharmonics:
+        for note in row:
+            if ui.tuningButtons[string].text() == note:
+                match = True
+                
+    if match:
+        print(f"reverting to {old}")
+    else:
+        print(f"Changing to {ui.tuningButtons[string].text()}")
 
 def resetFrets():
     ui.frets = (0, 24)
@@ -127,14 +141,21 @@ if __name__ == "__main__":
         ui.tuning_5,
         ui.tuning_6
     ]
+
+    i = 0
+    for t in ui.tuningButtons:
+        t.returnPressed.connect(lambda string=i: tuning(string))
+        i = i + 1
+
     ui.tuningButtons.reverse()
 
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
     #notes, intervals = f.build(chord=Chord(Note('Cb'), 'dim'))
 
+    ui.enharmonics = f.enharmonics
     rootNotes = []
-    for e in f.enharmonics:
+    for e in ui.enharmonics:
         rootNotes.append(e[0])
 
     ui.rootNoteSelector.addItems(rootNotes)
