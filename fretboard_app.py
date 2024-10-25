@@ -86,6 +86,17 @@ def setFret(fret):
         # Is this the first or the second fret selected in the range? 
         ui.fretSelected = True
         ui.firstFretSelected = fret
+        for row in ui.labels:
+            try:
+                index = fret - ui.frets[0]
+                if ui.frets[0] == 0:
+                    index = index - 1
+                row[index].setStyleSheet("QLabel"
+                    "{"
+                    "background: light blue;"
+                    "}") 
+            except IndexError:
+                pass
     else:
         # If second, we set up the new fret tuple and rebuild.
         ui.fretSelected = False
@@ -134,6 +145,12 @@ def update():
         notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
 
     populateFretboard(ui, notes, intervals, ui.frets)
+
+    if ui.showChord:
+        type = "chord"
+    else:
+        type = "scale"
+    ui.titleLabel.setText(f"{ui.rootNoteSelector.currentText()} {ui.scaleOrChordTypeSelector.currentText()} {type}")
 
 def tuning(string):
     # Deal with changes in tuning from one of the tuning peg input boxes.
