@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets, QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 from fretboard_ui import Ui_MainWindow
 from fretboard import Fretboard
 from musthe import *
@@ -10,11 +10,7 @@ def translate(string):
     string=string.replace('#', '♯')
     return string
 
-allScales = [ s for s in Scale.scales.keys() ]
-allChords = [ c for c in Chord.valid_types ]
-
 def populateFretboard(ui, notes, intervals, frets):
-
     # Set up all the labels with notes or intervals on them
     ui.labels = []
     if ui.showInterval:
@@ -34,6 +30,9 @@ def populateFretboard(ui, notes, intervals, frets):
         labelRow = []
         for column in row:
             label = QtWidgets.QLabel(ui.centralwidget, text=translate(column))
+            font = QtGui.QFont()
+            font.setPointSize(12)
+            label.setFont(font)
             ui.gridLayout.addWidget(label, i, j+1, 1, 1)
             labelRow.append(label)
             j = j + 1
@@ -49,13 +48,15 @@ def populateFretboard(ui, notes, intervals, frets):
 
     # Set up the fret buttons
     ui.fretButtons = []
-
     j = 0
     for fret in range(frets[0], frets[1]+1):
         if fret > 0:
             button = QtWidgets.QPushButton(ui.centralwidget)
             button.setMinimumSize(QtCore.QSize(40, 40))
             button.setMaximumSize(QtCore.QSize(40, 40))
+            font = QtGui.QFont()
+            font.setPointSize(12)
+            button.setFont(font)
             button.setObjectName("fretButton" + str(fret))
             button.setText(str(fret))
             ui.gridLayout.addWidget(button, 6, j+1, 1, 1)
@@ -63,53 +64,69 @@ def populateFretboard(ui, notes, intervals, frets):
             button.clicked.connect(lambda state, x=fret: setFret(x))
             j = j + 1
 
-    # Set up the tuning button values
+    # Set up the tuning button values and bold text if note is on the scale/chord
     i = 0
     for peg in ui.tuningButtons:
-        peg.setText(ui.tuning[i])
+        text = ui.tuning[i]
+        peg.setStyleSheet("QLineEdit")
+        for row in notes:
+            for note in row:
+                if text == note:
+                    peg.setStyleSheet("QLineEdit"
+                                "{"
+                                "border : 3px solid ;"
+                                "border-color : black"
+                                "}") 
+        peg.setText(text)
         i = i + 1
 
 def setFret(fret):
+    # Set new fret selection
     if not ui.fretSelected:
+        # Is this the first or the second fret selected in the range? 
         ui.fretSelected = True
         ui.firstFretSelected = fret
     else:
+        # If second, we set up the new fret tuple and rebuild.
         ui.fretSelected = False
         ui.secondFretSelected = fret
         if ui.firstFretSelected != ui.secondFretSelected:
             ui.frets = (ui.firstFretSelected, ui.secondFretSelected)
-            ui.frets = tuple(sorted(ui.frets))
+            ui.frets = tuple(sorted(ui.frets)) # You can select in any order.
             update()
 
 def update():
-    showChord_old = ui.showChord
+    # Updates the GUI.
 
+    showChord_old = ui.showChord
     ui.showChord = ui.scaleOrChordSlider.value()
     ui.showInterval = ui.notesOrIntervalsSlider.value()
 
-    # If the note/chord slider is changed, update the corresponding combo box.
+    # If the note/chord slider is changed, update the corresponding combo box to reflect the change.
     if ui.showChord != showChord_old:
         if ui.showChord:
             ui.scaleOrChordTypeSelector.clear()
-            ui.scaleOrChordTypeSelector.addItems(allChords)
+            ui.scaleOrChordTypeSelector.addItems(ui.allChords)
             type = ui.scaleOrChordTypeSelector.currentText()
             root = ui.rootNoteSelector.currentText()
             ui.chord = Chord(Note(root), type)
         else:
             ui.scaleOrChordTypeSelector.clear()
-            ui.scaleOrChordTypeSelector.addItems(allScales)
+            ui.scaleOrChordTypeSelector.addItems(ui.allScales)
             type = ui.scaleOrChordTypeSelector.currentText()
             root = ui.rootNoteSelector.currentText()
             ui.scale = Scale(Note(root), type)
 
-    # Re-build the labels.
+    # Re-build the labels. First remove the old ones.
     for row in ui.labels:
         for label in row:
             ui.gridLayout.removeWidget(label)
 
+    # Remove the buttons as well.
     for button in ui.fretButtons:
         ui.gridLayout.removeWidget(button)
 
+    # Generate the new fretboard
     f = Fretboard(ui.tuning)
     if ui.showChord:
         notes, intervals = f.build(chord=ui.chord, frets=ui.frets)
@@ -119,6 +136,7 @@ def update():
     populateFretboard(ui, notes, intervals, ui.frets)
 
 def tuning(string):
+    # Deal with changes in tuning from one of the tuning peg input boxes.
     old = ui.tuning[string]
     new = ui.tuningButtons[string].text().capitalize()
 
@@ -141,6 +159,7 @@ def resetFrets():
     update()
 
 def changeScaleOrChord():
+    # Change from scale to chord or back.
     try:
         delattr(ui, chord)
     except NameError:
@@ -159,18 +178,15 @@ def changeScaleOrChord():
         ui.statusbar.showMessage(f"{root} {type}", 10000)
     update()
 
-if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    ui.tuning_1.setFocus()
-
+def initialSetup(ui):
     ui.showChord = False
     ui.showInterval = False
     ui.fretSelected = False
 
-    ui.scaleOrChordTypeSelector.addItems(allScales)
+    # List of all the options for Chord() and Scale()
+    ui.allScales = [ s for s in Scale.scales.keys() ]
+    ui.allChords = [ c for c in Chord.valid_types ]
+    ui.scaleOrChordTypeSelector.addItems(ui.allScales)
 
     ui.notesOrIntervalsSlider.valueChanged['int'].connect(update)
     ui.scaleOrChordSlider.valueChanged['int'].connect(update)
@@ -208,6 +224,14 @@ if __name__ == "__main__":
     ui.rootNoteSelector.addItems(rootNotes)
 
     populateFretboard(ui, notes, intervals, ui.frets)
+
+if __name__ == "__main__":
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+
+    initialSetup(ui)
 
     MainWindow.show()
     sys.exit(app.exec_())
