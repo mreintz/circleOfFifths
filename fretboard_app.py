@@ -61,6 +61,8 @@ def populateFretboard(ui, notes, intervals, frets):
         labelRow = []
         for column in row:
             label = QtWidgets.QLabel(ui.centralwidget, text=translate(column))
+            label.setMinimumSize(QtCore.QSize(fretWidths[j+1], 40)) #(40, 40))
+            label.setMaximumSize(QtCore.QSize(fretWidths[j+1], 40)) #(40, 40))
             label.setObjectName(column)
             font = QtGui.QFont()
             font.setPointSize(12)
@@ -111,8 +113,8 @@ def populateFretboard(ui, notes, intervals, frets):
     for fret in range(frets[0], frets[1]+1):
         if fret > 0:
             button = QtWidgets.QPushButton(ui.centralwidget)
-            button.setMinimumSize(QtCore.QSize(40, 40))
-            button.setMaximumSize(QtCore.QSize(40, 40))
+            button.setMinimumSize(QtCore.QSize(fretWidths[fret], 40)) #(40, 40))
+            button.setMaximumSize(QtCore.QSize(fretWidths[fret], 40)) #(40, 40))
             font = QtGui.QFont()
             font.setPointSize(12)
             button.setFont(font)
@@ -176,6 +178,7 @@ def setFret(fret):
             ui.frets = (ui.firstFretSelected, ui.secondFretSelected)
             ui.frets = tuple(sorted(ui.frets)) # You can select in any order.
             update()
+    ui.rootNoteSelector.setFocus()
 
 def update():
     # Updates the GUI.
@@ -245,6 +248,7 @@ def tuning(string):
 def resetFrets():
     ui.frets = (0, 24)
     update()
+    ui.rootNoteSelector.setFocus()
 
 def changeScaleOrChord():
     # Change from scale to chord or back.
