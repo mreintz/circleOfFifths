@@ -21,7 +21,7 @@ interval_colors = {
     'm':        labelColors[2],
     'M':        labelColors[0],
     'd':        labelColors[6],
-    'P':        labelColors[0],
+    'P':        "background-color: rgba(220, 220, 170, 80%);",  #labelColors[0],
     'A':        labelColors[5],
     'P1':       "background-color: red; color: white;"
 }
@@ -108,6 +108,7 @@ def populateFretboard(ui, notes, intervals, frets):
             button.setFont(font)
             button.setObjectName("fretButton" + str(fret))
             button.setText(str(fret))
+            button.setFocusPolicy(QtCore.Qt.ClickFocus)
             ui.gridLayout.addWidget(button, 6, j+1, 1, 1)
             ui.fretButtons.append(button)
             button.clicked.connect(lambda state, x=fret: setFret(x))
@@ -306,6 +307,8 @@ def initialSetup(ui):
     ui.scaleOrChordTypeSelector.nut.connect(resetFrets)
     ui.scaleOrChordTypeSelector.root.connect(lambda thing='root': select(thing))
     ui.scaleOrChordTypeSelector.tuning.connect(lambda thing='tuning': select(thing))
+
+    ui.nutButton.setFocusPolicy(QtCore.Qt.ClickFocus)
 
     ui.tuning = ['E', 'A', 'D', 'G', 'B', 'E']
     ui.frets = (0,24)
