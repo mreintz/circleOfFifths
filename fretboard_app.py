@@ -5,6 +5,27 @@ from musthe import *
 import sys
 import pandas as pd
 
+transparent = "background-color: rgba(255, 255, 255, 0%);"
+
+labelColors = [
+    "background-color: rgba(205, 253, 205, 80%);",
+    "background-color: rgba(147, 223, 199, 80%);",
+    "background-color: rgba(173, 215, 229, 80%);",
+    "background-color: rgba(247, 247, 185, 80%);",
+    "background-color: rgba(255, 210, 127, 80%);",
+    "background-color: rgba(254, 160, 122, 80%);",
+    "background-color: rgba(217, 170, 174, 80%);"
+]
+
+interval_colors = {
+    'm':        labelColors[2],
+    'M':        labelColors[0],
+    'd':        labelColors[6],
+    'P':        labelColors[0],
+    'A':        labelColors[5],
+    'P1':       "background-color: red; color: white;"
+}
+
 def translate(string):
     string=string.replace('b', '♭')
     string=string.replace('#', '♯')
@@ -30,6 +51,7 @@ def populateFretboard(ui, notes, intervals, frets):
         labelRow = []
         for column in row:
             label = QtWidgets.QLabel(ui.centralwidget, text=translate(column))
+            label.setObjectName(column)
             font = QtGui.QFont()
             font.setPointSize(12)
             label.setFont(font)
@@ -39,12 +61,39 @@ def populateFretboard(ui, notes, intervals, frets):
         i = i + 1
         ui.labels.append(labelRow)
 
+    flattenedNotes = []
+    flattenedIntervals = []
+    for row in notes:
+        flattenedNotes += row
+    for row in intervals:
+        flattenedIntervals += row
+
     for row in ui.labels:
         for label in row:
             if label.text() != '':
                 label.setAlignment(QtCore.Qt.AlignCenter)
                 label.setFrameShape(QtWidgets.QFrame.Box)
                 label.setLineWidth(3)
+                if ui.showInterval:
+                    interval =  label.objectName()
+                    if interval != "P1":
+                        intervalType = interval[0]
+                    else:
+                        intervalType = interval
+                else:
+                    try:
+                        interval = flattenedIntervals[flattenedNotes.index(label.objectName())]
+                        if interval != "P1":
+                            intervalType = interval[0]
+                        else:
+                            intervalType = interval
+                    except ValueError:
+                        intervalType = ''
+
+                label.setStyleSheet("QLabel"
+                            "{"
+                            f"{interval_colors[intervalType]}"
+                            "}")
 
     # Set up the fret buttons
     ui.fretButtons = []
@@ -69,21 +118,32 @@ def populateFretboard(ui, notes, intervals, frets):
     for peg in ui.tuningButtons:
         text = ui.tuning[i]
         peg.setStyleSheet("QLineEdit")
+
+        try:
+            interval = flattenedIntervals[flattenedNotes.index(text)]
+            if interval != "P1":
+                intervalType = interval[0]
+            else:
+                intervalType = interval
+        except ValueError:
+            interval = ''
+
         for row in notes:
             for note in row:
                 if text == note:
                     peg.setStyleSheet("QLineEdit"
                                 "{"
                                 "border : 3px solid ;"
+                                f"{interval_colors[intervalType]}"
                                 "border-color : black"
-                                "}") 
+                                "}")
         peg.setText(text)
         i = i + 1
 
 def setFret(fret):
     # Set new fret selection
     if not ui.fretSelected:
-        # Is this the first or the second fret selected in the range? 
+        # Is this the first or the second fret selected in the range?
         ui.fretSelected = True
         ui.firstFretSelected = fret
         for row in ui.labels:
@@ -93,8 +153,8 @@ def setFret(fret):
                     index = index - 1
                 row[index].setStyleSheet("QLabel"
                     "{"
-                    "background: light blue;"
-                    "}") 
+                    f"{interval_colors['m']}"
+                    "}")
             except IndexError:
                 pass
     else:
