@@ -272,6 +272,11 @@ def toggle(thing):
 def select(thing):
     if thing == 'mode':
         ui.scaleOrChordTypeSelector.setFocus()
+    elif thing == 'root':
+        ui.rootNoteSelector.setFocus()
+    elif thing == 'tuning':
+        ui.tuning_6.setFocus()
+        ui.tuning_6.selectAll()
     return
 
 def initialSetup(ui):
@@ -294,10 +299,17 @@ def initialSetup(ui):
     ui.rootNoteSelector.chordOrScale.connect(lambda thing='chord': toggle(thing) )
     ui.rootNoteSelector.nut.connect(resetFrets)
     ui.rootNoteSelector.mode.connect(lambda thing='mode': select(thing))
+    ui.rootNoteSelector.tuning.connect(lambda thing='tuning': select(thing))
+
+    ui.scaleOrChordTypeSelector.notesOrIntervals.connect(lambda thing='intervals': toggle(thing) )
+    ui.scaleOrChordTypeSelector.chordOrScale.connect(lambda thing='chord': toggle(thing) )
+    ui.scaleOrChordTypeSelector.nut.connect(resetFrets)
+    ui.scaleOrChordTypeSelector.root.connect(lambda thing='root': select(thing))
+    ui.scaleOrChordTypeSelector.tuning.connect(lambda thing='tuning': select(thing))
 
     ui.tuning = ['E', 'A', 'D', 'G', 'B', 'E']
-    ui.frets = (5,9)
-    ui.scale = Scale(Note('Cb'), 'major')
+    ui.frets = (0,24)
+    ui.scale = Scale(Note('C'), 'major')
 
     ui.tuningButtons = [
         ui.tuning_6,
@@ -325,6 +337,7 @@ def initialSetup(ui):
     ui.rootNoteSelector.addItems(rootNotes)
 
     populateFretboard(ui, notes, intervals, ui.frets)
+    ui.rootNoteSelector.setFocus()
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

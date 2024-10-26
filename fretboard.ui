@@ -343,7 +343,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="scaleOrChordTypeSelector">
+           <widget class="QComboBoxWithKeyEvents" name="scaleOrChordTypeSelector">
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -380,6 +380,11 @@
   <tabstop>tuning_3</tabstop>
   <tabstop>tuning_2</tabstop>
   <tabstop>tuning_1</tabstop>
+  <tabstop>rootNoteSelector</tabstop>
+  <tabstop>scaleOrChordTypeSelector</tabstop>
+  <tabstop>notesOrIntervalsSlider</tabstop>
+  <tabstop>scaleOrChordSlider</tabstop>
+  <tabstop>nutButton</tabstop>
  </tabstops>
  <resources/>
  <connections/>

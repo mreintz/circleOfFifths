@@ -159,7 +159,7 @@ class Ui_MainWindow(object):
         self.rootNoteSelector.setFont(font)
         self.rootNoteSelector.setObjectName("rootNoteSelector")
         self.horizontalLayout_3.addWidget(self.rootNoteSelector)
-        self.scaleOrChordTypeSelector = QtWidgets.QComboBox(self.centralwidget)
+        self.scaleOrChordTypeSelector = QComboBoxWithKeyEvents(self.centralwidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.scaleOrChordTypeSelector.setFont(font)
@@ -181,6 +181,11 @@ class Ui_MainWindow(object):
         MainWindow.setTabOrder(self.tuning_4, self.tuning_3)
         MainWindow.setTabOrder(self.tuning_3, self.tuning_2)
         MainWindow.setTabOrder(self.tuning_2, self.tuning_1)
+        MainWindow.setTabOrder(self.tuning_1, self.rootNoteSelector)
+        MainWindow.setTabOrder(self.rootNoteSelector, self.scaleOrChordTypeSelector)
+        MainWindow.setTabOrder(self.scaleOrChordTypeSelector, self.notesOrIntervalsSlider)
+        MainWindow.setTabOrder(self.notesOrIntervalsSlider, self.scaleOrChordSlider)
+        MainWindow.setTabOrder(self.scaleOrChordSlider, self.nutButton)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate

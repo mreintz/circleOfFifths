@@ -11,6 +11,7 @@ class QComboBoxWithKeyEvents(QtWidgets.QComboBox):
     nut = pyqtSignal()
     root = pyqtSignal()
     mode = pyqtSignal()
+    tuning = pyqtSignal()
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_I:
@@ -21,8 +22,12 @@ class QComboBoxWithKeyEvents(QtWidgets.QComboBox):
             self.nut.emit()
         elif event.key() == QtCore.Qt.Key_R:
             self.root.emit()
-        elif event.key() == QtCore.Qt.Key_M:
+        elif event.key() == QtCore.Qt.Key_Right:
             self.mode.emit()
+        elif event.key() == QtCore.Qt.Key_Left:
+            self.root.emit()
+        elif event.key() == QtCore.Qt.Key_T:
+            self.tuning.emit()
         else:
             super(QComboBoxWithKeyEvents, self).keyPressEvent(event)
 
@@ -30,12 +35,12 @@ class QLineEditTabReact(QtWidgets.QLineEdit):
     def __init__(self, parent):
         super().__init__(parent)
 
+    tune = pyqtSignal()
+
     def event(self,event):
         if event.type() == QtCore.QEvent.KeyPress and event.key() == QtCore.Qt.Key_Tab:
-            self.tabFollow()
+            self.returnPressed.emit()
             super(QLineEditTabReact, self).keyPressEvent(event)
             return True
         else:
             return QtWidgets.QLineEdit.event(self,event)
-    def tabFollow(self):
-        print("tab-key pressed!")
