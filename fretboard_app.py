@@ -7,6 +7,16 @@ import pandas as pd
 
 transparent = "background-color: rgba(255, 255, 255, 0%);"
 
+fullFretboard = 2000
+
+firstFret = fullFretboard / 18
+remaining = fullFretboard - firstFret
+fretWidths = [round(firstFret)]
+for i in range(25):
+    nextFret = remaining/18
+    remaining = remaining - nextFret
+    fretWidths.append(round(nextFret))
+
 labelColors = [
     "background-color: rgba(205, 253, 205, 80%);",
     "background-color: rgba(147, 223, 199, 80%);",
