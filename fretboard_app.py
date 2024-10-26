@@ -255,6 +255,25 @@ def changeScaleOrChord():
         ui.statusbar.showMessage(f"{root} {type}", 10000)
     update()
 
+def toggle(thing):
+    if thing == 'intervals':
+        if ui.notesOrIntervalsSlider.value() == 1:
+            ui.notesOrIntervalsSlider.setValue(0)
+        else:
+            ui.notesOrIntervalsSlider.setValue(1)
+    elif thing == 'chord':
+        if ui.scaleOrChordSlider.value() == 1:
+            ui.scaleOrChordSlider.setValue(0)
+        else:
+            ui.scaleOrChordSlider.setValue(1)
+    ui.rootNoteSelector.setFocus()
+    return
+
+def select(thing):
+    if thing == 'mode':
+        ui.scaleOrChordTypeSelector.setFocus()
+    return
+
 def initialSetup(ui):
     ui.showChord = False
     ui.showInterval = False
@@ -270,6 +289,11 @@ def initialSetup(ui):
     ui.nutButton.clicked.connect(resetFrets)
     ui.rootNoteSelector.activated.connect(changeScaleOrChord)
     ui.scaleOrChordTypeSelector.activated.connect(changeScaleOrChord)
+
+    ui.rootNoteSelector.notesOrIntervals.connect(lambda thing='intervals': toggle(thing) )
+    ui.rootNoteSelector.chordOrScale.connect(lambda thing='chord': toggle(thing) )
+    ui.rootNoteSelector.nut.connect(resetFrets)
+    ui.rootNoteSelector.mode.connect(lambda thing='mode': select(thing))
 
     ui.tuning = ['E', 'A', 'D', 'G', 'B', 'E']
     ui.frets = (5,9)
