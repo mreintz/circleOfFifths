@@ -18,12 +18,12 @@ labelColors = [
 ]
 
 interval_colors = {
-    'm':        labelColors[2],
-    'M':        labelColors[0],
+    'm':        "background-color: lightBlue; color: black;",   #labelColors[2],
+    'M':        "background-color: lightGreen; color: black;",  #labelColors[0],
     'd':        labelColors[6],
-    'P':        "background-color: rgba(220, 220, 170, 80%);",  #labelColors[0],
+    'P':        "background-color: yellow; color: black;",       #"background-color: rgba(220, 220, 170, 80%);",  #labelColors[0],
     'A':        labelColors[5],
-    'P1':       "background-color: red; color: white;"
+    'P1':       "background-color: red; color: white; border-color: black;"
 }
 
 def translate(string):
