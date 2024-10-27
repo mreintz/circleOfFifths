@@ -255,6 +255,9 @@ def update():
     except:
         pass
 
+    MainWindow.resize(MainWindow.minimumSizeHint())
+    MainWindow.adjustSize()
+
 def tuning(string):
     # Deal with changes in tuning from one of the tuning peg input boxes.
     old = ui.tuning[string]
