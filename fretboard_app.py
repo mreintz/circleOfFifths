@@ -36,6 +36,14 @@ interval_colors = {
     'P1':       "background-color: red; color: white; border-color: black;"
 }
 
+replacementStrings = {
+    'dim ':  'diminished ',
+    '_':    ' ',
+    'min ':  'minor ',
+    'maj ':  'major ',
+    'aug ':  'augmented '
+}
+
 def translate(string):
     string=string.replace('b', '♭')
     string=string.replace('#', '♯')
@@ -104,7 +112,7 @@ def populateFretboard(ui, notes, intervals, frets):
 
                 label.setStyleSheet("QLabel"
                             "{"
-                            f"{interval_colors[intervalType]}"
+                            f"{interval_colors.get(intervalType, labelColors[6])}"
                             "}")
 
     # Set up the fret buttons
@@ -147,7 +155,7 @@ def populateFretboard(ui, notes, intervals, frets):
                     peg.setStyleSheet("QLineEdit"
                                 "{"
                                 "border : 3px solid ;"
-                                f"{interval_colors[intervalType]}"
+                                f"{interval_colors.get(intervalType, labelColors[6])}"
                                 "border-color : black"
                                 "}")
         peg.setText(text)
@@ -225,6 +233,13 @@ def update():
     else:
         type = "scale"
     ui.titleLabel.setText(f"{ui.rootNoteSelector.currentText()} {ui.scaleOrChordTypeSelector.currentText()} {type}")
+    title = ui.titleLabel.text()
+    try:
+        for string in replacementStrings.keys():
+            title = title.replace(string, replacementStrings[string])
+        ui.titleLabel.setText(title)
+    except:
+        pass
 
 def tuning(string):
     # Deal with changes in tuning from one of the tuning peg input boxes.
