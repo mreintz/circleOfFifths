@@ -362,9 +362,27 @@ def initialSetup(ui):
     #notes, intervals = f.build(chord=Chord(Note('Cb'), 'dim'))
 
     ui.enharmonics = f.enharmonics
-    rootNotes = []
-    for e in ui.enharmonics:
-        rootNotes.append(e[0])
+    #rootNotes = []
+    #for e in ui.enharmonics:
+    #    rootNotes.append(e[0])
+
+    rootNotes = ['C',
+                 'C#',
+                 'Db',
+                 'D',
+                 'D#',
+                 'Eb',
+                 'E',
+                 'F',
+                 'F#',
+                 'Gb',
+                 'G',
+                 'G#',
+                 'Ab',
+                 'A',
+                 'A#',
+                 'Bb',
+                 'B',]
 
     ui.rootNoteSelector.addItems(rootNotes)
 
