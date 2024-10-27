@@ -2,7 +2,7 @@ from musthe import *
 import pandas as pd
 
 class Fretboard():
-    def __init__(self, tuning): 
+    def __init__(self, tuning):
 
         self.enharmonics = [
             ['C',  'C',  'B#',  'Dbb'],
@@ -49,6 +49,10 @@ class Fretboard():
                 self.chord = kwargs['chord']
                 self.notes = [ str(n) for n in self.chord.notes ]
                 self.intervals = self.chord.recipes[self.chord.chord_type]
+                if 'P8' in self.intervals:
+                    index = self.intervals.index('P8')
+                    del self.notes[index]
+                    del self.intervals[index]
             elif 'scale' in kwargs:
                 self.scale = kwargs['scale']
                 self.notes = [ str(n) for n in self.scale.notes ]
@@ -65,7 +69,7 @@ class Fretboard():
                     self.frets = (0, 24)
             else:
                 self.frets = (0, 24)
-        
+
         """Place all the submitted notes on the fretboard."""
         notes_grid = []
         intervals_grid = []
@@ -120,10 +124,9 @@ class Fretboard():
                     print(f'{str(self.scale.root)} {self.scale.name} scale')
                 except AttributeError:
                     pass
-        
+
         header()
         plainprint(self.notes_grid)
 
         header()
         plainprint(self.intervals_grid)
-                
