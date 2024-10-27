@@ -121,8 +121,8 @@ def populateFretboard(ui, notes, intervals, frets):
     for fret in range(frets[0], frets[1]+1):
         if fret > 0:
             button = QtWidgets.QPushButton(ui.centralwidget)
-            button.setMinimumSize(QtCore.QSize(fretWidths[fret], 40)) #(40, 40))
-            button.setMaximumSize(QtCore.QSize(fretWidths[fret], 40)) #(40, 40))
+            button.setMinimumSize(QtCore.QSize(fretWidths[fret - frets[0]], 40)) #(40, 40))
+            button.setMaximumSize(QtCore.QSize(fretWidths[fret - frets[0]], 40)) #(40, 40))
             font = QtGui.QFont()
             font.setPointSize(12)
             button.setFont(font)
@@ -371,6 +371,15 @@ def initialSetup(ui, argv):
         t.returnPressed.connect(lambda string=i: tuning(string))
         i = i + 1
 
+    if len(argv) > 3:
+        try:
+            frets = tuple(map(int, argv[3].split(', ')))
+            frets = tuple(sorted(frets))
+            if max(frets) <= 24 and min(frets) >= 0:
+                ui.frets = frets
+        except:
+            pass
+
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
     #notes, intervals = f.build(chord=Chord(Note('Cb'), 'dim'))
@@ -426,7 +435,7 @@ def initialSetup(ui, argv):
             try:
                 if argv[1] == '--help':
                     print(
-f"""Syntax: fretboard_app.py <rootnote> <scale or chord type>.
+f"""Syntax: fretboard_app.py <rootnote> <scale or chord type> "<fromfret>, <tofret>".
 Available rootnotes:
 {", ".join(rootNotes)},
 
