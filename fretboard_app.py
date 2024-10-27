@@ -309,7 +309,7 @@ def select(thing):
         ui.tuning_6.selectAll()
     return
 
-def initialSetup(ui):
+def initialSetup(ui, argv):
     ui.showChord = False
     ui.showInterval = False
     ui.fretSelected = False
@@ -385,9 +385,51 @@ def initialSetup(ui):
                  'B',]
 
     ui.rootNoteSelector.addItems(rootNotes)
-
     populateFretboard(ui, notes, intervals, ui.frets)
+
+    try:
+        root = argv[1].capitalize()
+        type = argv[2]
+        ui.scale = Scale(Note(root), type)
+        ui.rootNoteSelector.setCurrentText(root)
+        ui.scaleOrChordTypeSelector.setCurrentText(type)
+        print(f"Setting {root} {type} scale.")
+        update()
+    except:
+        try:
+            root = argv[1].capitalize()
+            type = argv[2]
+            ui.chord = Chord(Note(root), type)
+            ui.showChord = True
+            ui.scaleOrChordSlider.setValue(1)
+            ui.scaleOrChordTypeSelector.clear()
+            ui.scaleOrChordTypeSelector.addItems(ui.allChords)
+            ui.rootNoteSelector.setCurrentText(root)
+            ui.scaleOrChordTypeSelector.setCurrentText(type)
+            print(f"Setting {root} {type} chord.")
+            update()
+        except:
+            try:
+                if argv[1] == '--help':
+                    print(
+f"""Syntax: fretboard_app.py <rootnote> <scale or chord type>.
+Available rootnotes:
+{", ".join(rootNotes)},
+
+Available scale types:
+maj, min, aug, dim, dom7, min7, maj7, aug7, dim7, m7dim5, sus2, sus4, open5
+
+Available chord types:
+major, natural_minor, harmonic_minor, melodic_minor, major_pentatonic, minor_pentatonic, ionian, dorian, phrygian, lydian, mixolydian, aeolian, locrian
+
+""")
+                    return(False)
+
+            except:
+                print("No valid chord or scale provided, reverting to C major.")
+
     ui.rootNoteSelector.setFocus()
+    return(True)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -395,7 +437,9 @@ if __name__ == "__main__":
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 
-    initialSetup(ui)
-
-    MainWindow.show()
-    sys.exit(app.exec_())
+    success = initialSetup(ui, sys.argv)
+    if success:
+        MainWindow.show()
+        sys.exit(app.exec_())
+    else:
+        sys.exit()
