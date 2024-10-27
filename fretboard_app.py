@@ -151,13 +151,16 @@ def populateFretboard(ui, notes, intervals, frets):
 
         for row in notes:
             for note in row:
-                if text == note:
-                    peg.setStyleSheet("QLineEdit"
-                                "{"
-                                "border : 3px solid ;"
-                                f"{interval_colors.get(intervalType, labelColors[6])}"
-                                "border-color : black"
-                                "}")
+                for enharmonicRow in ui.enharmonics:
+                    #if text == note:
+                    if (text in enharmonicRow and note in enharmonicRow):
+                        print(f"Både {text} og {note} er i {enharmonicRow} og {text} har type {intervalType}")
+                        peg.setStyleSheet("QLineEdit"
+                                    "{"
+                                    "border : 3px solid ;"
+                                    f"{interval_colors.get(intervalType, labelColors[6])}"
+                                    "border-color : black"
+                                    "}")
         peg.setText(text)
         i = i + 1
 
