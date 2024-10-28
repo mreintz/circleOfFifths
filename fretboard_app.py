@@ -65,7 +65,7 @@ def populateFretboard(ui, notes, intervals, frets):
 
     i = 0
     for row in fretboard:
-        j = 0
+        j = 1
         labelRow = []
         for column in row:
             label = QtWidgets.QLabel(ui.centralwidget, text=translate(column))
@@ -75,7 +75,7 @@ def populateFretboard(ui, notes, intervals, frets):
             font = QtGui.QFont()
             font.setPointSize(12)
             label.setFont(font)
-            ui.gridLayout.addWidget(label, i, j+1, 1, 1)
+            ui.gridLayout.addWidget(label, i, 2*j+1, 1, 1)
             labelRow.append(label)
             j = j + 1
         i = i + 1
@@ -115,9 +115,23 @@ def populateFretboard(ui, notes, intervals, frets):
                             f"{interval_colors.get(intervalType, labelColors[6])}"
                             "}")
 
+    ui.lines = []                
+    # Set up the frets themselves:
+    for i in range(1, len(ui.labels[0])+1):
+        line = QtWidgets.QFrame(ui.centralwidget)
+        line.setMinimumSize(QtCore.QSize(5, 5))
+        line.setFrameShadow(QtWidgets.QFrame.Plain)
+        line.setLineWidth(3)
+        line.setMidLineWidth(0)
+        line.setFrameShape(QtWidgets.QFrame.VLine)
+        line.setObjectName(f"freLine{i}")
+        ui.gridLayout.addWidget(line, 0, 2*i, 6, 1)
+        ui.lines.append(line)
+        i = i + 1
+
     # Set up the fret buttons
     ui.fretButtons = []
-    j = 0
+    j = 1
     for fret in range(frets[0], frets[1]+1):
         if fret > 0:
             button = QtWidgets.QPushButton(ui.centralwidget)
@@ -129,7 +143,7 @@ def populateFretboard(ui, notes, intervals, frets):
             button.setObjectName("fretButton" + str(fret))
             button.setText(str(fret))
             button.setFocusPolicy(QtCore.Qt.ClickFocus)
-            ui.gridLayout.addWidget(button, 6, j+1, 1, 1)
+            ui.gridLayout.addWidget(button, 6, 2*j+1, 1, 1)
             ui.fretButtons.append(button)
             button.clicked.connect(lambda state, x=fret: setFret(x))
             j = j + 1
@@ -232,6 +246,10 @@ def update():
     # Remove the buttons as well.
     for button in ui.fretButtons:
         ui.gridLayout.removeWidget(button)
+
+    # And the fret lines:
+    for line in ui.lines:
+        ui.gridLayout.removeWidget(line)
 
     # Generate the new fretboard
     f = Fretboard(ui.tuning)
