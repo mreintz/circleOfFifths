@@ -211,6 +211,7 @@ def setFret(fret):
         ui.fretSelected = False
         ui.secondFretSelected = fret
         if ui.firstFretSelected != ui.secondFretSelected:
+            ui.frets_old = ui.frets
             ui.frets = (ui.firstFretSelected, ui.secondFretSelected)
             ui.frets = tuple(sorted(ui.frets)) # You can select in any order.
             update()
@@ -273,8 +274,10 @@ def update():
     except:
         pass
 
-    MainWindow.resize(MainWindow.minimumSizeHint())
-    MainWindow.adjustSize()
+    if ui.frets_old != ui.frets:
+        MainWindow.resize(MainWindow.minimumSizeHint())
+        MainWindow.adjustSize()
+        ui.frets_old = ui.frets
 
 def tuning(string):
     # Deal with changes in tuning from one of the tuning peg input boxes.
@@ -401,6 +404,8 @@ def initialSetup(ui, argv):
         except:
             pass
 
+    ui.frets_old = ui.frets
+
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
     #notes, intervals = f.build(chord=Chord(Note('Cb'), 'dim'))
@@ -471,6 +476,9 @@ major, natural_minor, harmonic_minor, melodic_minor, major_pentatonic, minor_pen
 
             except:
                 print("No valid chord or scale provided, reverting to C major.")
+
+    MainWindow.resize(MainWindow.minimumSizeHint())
+    MainWindow.adjustSize()
 
     ui.rootNoteSelector.setFocus()
     return(True)
