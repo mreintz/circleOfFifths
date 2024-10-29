@@ -120,7 +120,7 @@ def populateFretboard(ui, notes, intervals, frets):
     for i in range(1, len(ui.labels[0])+1):
         line = QtWidgets.QFrame(ui.centralwidget)
         line.setMinimumSize(QtCore.QSize(5, 5))
-        line.setFrameShadow(QtWidgets.QFrame.Plain)
+        line.setFrameShadow(QtWidgets.QFrame.Raised)
         line.setLineWidth(3)
         line.setMidLineWidth(0)
         line.setFrameShape(QtWidgets.QFrame.VLine)
@@ -408,12 +408,8 @@ def initialSetup(ui, argv):
 
     f = Fretboard(ui.tuning)
     notes, intervals = f.build(scale=ui.scale, frets=ui.frets)
-    #notes, intervals = f.build(chord=Chord(Note('Cb'), 'dim'))
 
     ui.enharmonics = f.enharmonics
-    #rootNotes = []
-    #for e in ui.enharmonics:
-    #    rootNotes.append(e[0])
 
     rootNotes = ['C',
                  'C#',
@@ -479,6 +475,8 @@ major, natural_minor, harmonic_minor, melodic_minor, major_pentatonic, minor_pen
 
     MainWindow.resize(MainWindow.minimumSizeHint())
     MainWindow.adjustSize()
+
+    ui.statusbar.showMessage("Scale or (C)hord, Note or (I)nterval, Change (T)uning, Revert to (N)ormal. Arrows up/down and left/right for the root note and type selection. Clicking fret buttons zooms in.", 100000)
 
     ui.rootNoteSelector.setFocus()
     return(True)
