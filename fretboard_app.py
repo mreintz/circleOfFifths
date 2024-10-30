@@ -204,6 +204,7 @@ def setFret(fret):
                     "{"
                     f"{interval_colors['m']}"
                     "}")
+                ui.statusbar.showMessage("Click the next fret to zoom in on the fretboard.", 10000)
             except IndexError:
                 pass
     else:
@@ -215,6 +216,11 @@ def setFret(fret):
             ui.frets = (ui.firstFretSelected, ui.secondFretSelected)
             ui.frets = tuple(sorted(ui.frets)) # You can select in any order.
             update()
+            ui.statusbar.showMessage(f"Zooming in on frets {str(ui.frets[0])} to {str(ui.frets[1])}.", 10000)
+        else:
+            update()
+            ui.statusbar.showMessage("Reverting to previous fret selection.", 10000)
+
     ui.rootNoteSelector.setFocus()
 
 def update():
@@ -291,11 +297,11 @@ def tuning(string):
                 match = True
 
     if not match:
-        ui.statusbar.showMessage(f"reverting to {old}", 10000)
+        ui.statusbar.showMessage(f"Not a valid tuning, reverting to {old}", 10000)
         ui.tuningButtons[string].setText(old)
     elif old != new:
-        ui.statusbar.showMessage(f"Changing to {new}", 10000)
         ui.tuning[string] = new
+        ui.statusbar.showMessage(f"Tuning is now {''.join(ui.tuning)}", 10000)
         update()
 
 def resetFrets():
@@ -345,6 +351,7 @@ def select(thing):
     elif thing == 'tuning':
         ui.tuning_6.setFocus()
         ui.tuning_6.selectAll()
+        ui.statusbar.showMessage("Change tuning. Tab or Enter to set new tuning.", 10000)
     return
 
 def initialSetup(ui, argv):
