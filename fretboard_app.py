@@ -130,6 +130,8 @@ def populateFretboard(ui, notes, intervals, frets):
         i = i + 1
 
     # Set up the fret buttons
+    fretMarker = "●"
+    ui.fretMarkers = []
     ui.fretButtons = []
     j = 1
     for fret in range(frets[0], frets[1]+1):
@@ -147,6 +149,15 @@ def populateFretboard(ui, notes, intervals, frets):
             ui.fretButtons.append(button)
             button.clicked.connect(lambda state, x=fret: setFret(x))
             j = j + 1
+        if fret in [3, 5, 7, 9, 12, 15, 17, 19, 21]:
+            dot = QtWidgets.QLabel(ui.centralwidget, text=translate(column))
+            dot.setAlignment(QtCore.Qt.AlignCenter)
+            if fret != 12:
+                dot.setText(fretMarker)
+            else:
+                dot.setText(fretMarker+fretMarker)
+            ui.gridLayout.addWidget(dot, 7, 2*j-1, 1, 1)
+            ui.fretMarkers.append(dot)
 
     # Set up the tuning button values and bold text if note is on the scale/chord
     i = 0
@@ -257,6 +268,10 @@ def update():
     # And the fret lines:
     for line in ui.lines:
         ui.gridLayout.removeWidget(line)
+
+    # And the dots:
+    for dot in ui.fretMarkers:
+        ui.gridLayout.removeWidget(dot)
 
     # Generate the new fretboard
     f = Fretboard(ui.tuning)
