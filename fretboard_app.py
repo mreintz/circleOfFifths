@@ -115,7 +115,7 @@ def populateFretboard(ui, notes, intervals, frets):
                             f"{interval_colors.get(intervalType, labelColors[6])}"
                             "}")
 
-    ui.lines = []                
+    ui.lines = []
     # Set up the frets themselves:
     for i in range(1, len(ui.labels[0])+1):
         line = QtWidgets.QFrame(ui.centralwidget)
@@ -286,7 +286,7 @@ def update():
         type = "chord"
     else:
         type = "scale"
-    ui.titleLabel.setText(f"{ui.rootNoteSelector.currentText()} {ui.scaleOrChordTypeSelector.currentText()} {type}")
+    ui.titleLabel.setText(f"{translate(ui.rootNoteSelector.currentText())} {ui.scaleOrChordTypeSelector.currentText()} {type}")
     title = ui.titleLabel.text()
     try:
         for string in replacementStrings.keys():
