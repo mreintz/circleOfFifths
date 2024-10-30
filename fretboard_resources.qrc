@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="icons">
+    <file>headstock.png</file>
+  </qresource>
+</RCC>
