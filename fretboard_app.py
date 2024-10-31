@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from fretboard_ui import Ui_MainWindow
 from fretboard import Fretboard
+import fretboard_rc
 from musthe import *
 import sys
 import pandas as pd
@@ -506,6 +507,8 @@ major, natural_minor, harmonic_minor, melodic_minor, major_pentatonic, minor_pen
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
+    MainWindow.setWindowIcon(QtGui.QIcon(":/icons/headstock.png"))
+
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
 

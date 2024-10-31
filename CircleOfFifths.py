@@ -71,16 +71,16 @@ def translate(string):
 
 class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
-    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
-    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons    
+    #QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
+    #QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons    
 
     def __init__(self, *args, obj=None, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setupUi(self)
-        
+
         self.setWindowTitle("Circle of Fifths")
         self.setWindowIcon(QtGui.QIcon(":/images/note.ico"))
-        self.setFixedSize(674, 736)        
+        self.setFixedSize(674, 736)
 
         self.first = True
         self.chordsInKey = True
@@ -98,7 +98,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.chordprog2,
             self.chordprog3,
             self.chordprog4
-        ]        
+        ]
 
         self.labels = [
             self.CLabel,
@@ -130,7 +130,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.chordLabel11
         ]
 
-        self.chordPrintLabels = [ 
+        self.chordPrintLabels = [
             self.onechord,
             self.twochord,
             self.threechord,
@@ -140,7 +140,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.sevenchord
         ]
 
-        self.intervalLabels = [ 
+        self.intervalLabels = [
             self.onechord_2,
             self.twochord_2,
             self.threechord_2,
@@ -189,7 +189,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 dh = self.findWindow.height()
                 self.findWindow.setGeometry(px, py + 150, dw, dh)
                 self.findWindow.exec_()
-                
+
                 try:
                     if isinstance(self.findWindow.keys, str):
                         if 'm' not in self.findWindow.keys:
@@ -200,11 +200,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                             self.mode = 'Minor'
                             self.modeBox.setCurrentIndex(5)
                             self.setkey(self.findWindow.keys.split('m')[0])
-                            
+
                         self.statusbar.showMessage("Key set to {0}".format(self.findWindow.keys), 10000)
                 except AttributeError:
                     pass
-                finally: 
+                finally:
                     self.findWindow = None
 
             else:
@@ -247,7 +247,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     4: 'V',
                 }
             )
-        ]          
+        ]
 
         minorpatterns = [
             (
@@ -283,7 +283,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                     6: 'VII'
                 }
             )
-        ]           
+        ]
 
         for i in range(4):
             if self.mode in ['Major', 'Lydian', 'Mixolydian', 'Ionian', 'maj']:
@@ -296,7 +296,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             pat = pat[:len(pat)-2]
             cho = ''
             for s in p[1]:
-                cho = cho + "{0} - ".format(s)     
+                cho = cho + "{0} - ".format(s)
             cho = cho[:len(cho)-2]
             self.proglabels[i].setText(pat)
             self.progchordlabels[i].setText(cho)
@@ -428,11 +428,11 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Generate the abstract circle of fifths from the key and the mode.
         self.circle = CircleOfFifths(Note(self.key), mode=self.mode)
 
-        # Create the "clockstring", i.e. the string of note labels to be written starting from 12 o'clock on the circle. 
+        # Create the "clockstring", i.e. the string of note labels to be written starting from 12 o'clock on the circle.
         # It will always start with a C, but the flats and sharps will vary.
         self.clockstring = self.circle.circlestring[12-self.clockface:]+self.circle.circlestring[:12-self.clockface]
-        
-        # Write the clockstring onto the labels. 
+
+        # Write the clockstring onto the labels.
         i = 0
         for l in self.labels:
             l.setText(translate(self.clockstring[i]))
@@ -445,7 +445,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.SharpFlatLabel.setText('')
 
             self.chord = Chord(Note(self.key), self.modeBox.currentText())
-            
+
             # Otherwise, get the notes in the selected chord.
             self.notesInChord = []
             i = 0
@@ -455,7 +455,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 i = i + 1
 
     # Update the "inner labels" on the circle.
-    def updateChords(self):        
+    def updateChords(self):
 
         # Reset everything.
         for l in self.chordLabels:
@@ -539,7 +539,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.chordLabels[hour].setText(interval)
                 if recipe == 0:
                     l.setStyleSheet(chord_colors['P1'])
-                else:    
+                else:
                     l.setStyleSheet(chord_colors[interval[0]])
 
                 i = i + 1
@@ -550,4 +550,4 @@ app = QtWidgets.QApplication(sys.argv)
 #window = Ui()
 window = MainWindow()
 window.show()
-app.exec_()        
+app.exec_()
