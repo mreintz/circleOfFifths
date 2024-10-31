@@ -511,6 +511,7 @@ if __name__ == "__main__":
 
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
+    MainWindow.setWindowTitle("Guitar fretboard, scales and chords")
 
     success = initialSetup(ui, sys.argv)
     if success:
