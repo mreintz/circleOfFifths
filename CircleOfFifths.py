@@ -79,7 +79,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.setWindowTitle("Circle of Fifths")
-        self.setWindowIcon(QtGui.QIcon(":/images/note.ico"))
+        self.setWindowIcon(QtGui.QIcon(":/images/signature.ico"))
         self.setFixedSize(674, 736)
 
         self.first = True

@@ -5,6 +5,8 @@ import sys
 
 from keysfromchords_ui import Ui_Dialog
 
+import CircleOfFifths_rc
+
 majorcolor = "QPushButton {background-color : rgba(205, 253, 205, 80%)};"
 minorcolor = "QPushButton {background-color : rgba(173, 215, 229, 80%)};"
 
@@ -71,6 +73,7 @@ class FindKeyUi(QtWidgets.QDialog, Ui_Dialog):
         self.majorMinorSlider.valueChanged.connect(self.majorOrMinor)
 
         self.setWindowTitle("Find key from chords")
+        self.setWindowIcon(QtGui.QIcon(":/images/signature.ico"))
 
         self.keyButtons = []
 
