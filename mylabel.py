@@ -5,13 +5,12 @@ class myLabel(QtWidgets.QLabel):
     def __init__(self, parent):
         super().__init__(parent)
 
-    clicked = pyqtSignal()
-    play = pyqtSignal()
+    clicked, play, note = [ pyqtSignal() for i in range(3) ]
 
     def mousePressEvent(self, event):
         modifiers = QtGui.QGuiApplication.keyboardModifiers()
         if modifiers & Qt.ShiftModifier:
-            pass
+            self.note.emit()
         elif modifiers & Qt.ControlModifier:
             self.play.emit()
         else:

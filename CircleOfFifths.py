@@ -6,13 +6,13 @@ from circle_ui import Ui_MainWindow
 from chordprogression import progression
 from findkey import FindKeyUi
 
-PLAYSOUNDS = False
+play_sounds = False
 
 try:
     from play_sounds import *
-    PLAYSOUNDS = True
+    play_sounds = True
 except ModuleNotFoundError:
-    pass
+    print("Install the tinysoundfont package if you want sound support.")
 
 transparent = "background-color: rgba(255, 255, 255, 0%);"
 
@@ -176,7 +176,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         for l in self.labels:
             l.clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.setkey(val))
-            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val))
+            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, note=False))
+            l.note.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, note=True))
 
         self.SharpFlatLabel.clicked.connect(self.findKey)
 
@@ -188,21 +189,30 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.findWindow = None
         self.setkey(self.key)
 
-    def play(self, val):
-        type = 'M'
-        for chord in self.circle.chords():
-            if chord[1] == val:
-                type = chord[2]
-                break
+    def play(self, val, note):
+        if self.chordsInKey:
+            type = 'M'
+            for chord in self.circle.chords():
+                if chord[1] == val:
+                    type = chord[2]
+                    break
 
-        if type == 'd':
-            type = 'dim'
+            if type == 'd':
+                type = 'dim'
 
-        chord = Chord(Note(val), type)
-        print(chord.notes)
+            chord = Chord(Note(val), type)
 
-        if PLAYSOUNDS:
-            play_chord(chord.notes)
+        else:
+            chord = self.chord
+
+        if note:
+            single_note = Note(val)
+
+        if play_sounds:
+            if note:
+                play_chord([ single_note ])
+            else:
+                play_chord(chord.notes)
 
 
     def findKey(self):
