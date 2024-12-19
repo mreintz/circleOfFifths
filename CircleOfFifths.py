@@ -6,6 +6,14 @@ from circle_ui import Ui_MainWindow
 from chordprogression import progression
 from findkey import FindKeyUi
 
+PLAYSOUNDS = False
+
+try:
+    from play_sounds import *
+    PLAYSOUNDS = True
+except ModuleNotFoundError:
+    pass
+
 transparent = "background-color: rgba(255, 255, 255, 0%);"
 
 labelColors = [
@@ -168,6 +176,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         for l in self.labels:
             l.clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.setkey(val))
+            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val))
 
         self.SharpFlatLabel.clicked.connect(self.findKey)
 
@@ -178,6 +187,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.findWindow = None
         self.setkey(self.key)
+
+    def play(self, val):
+        type = 'M'
+        for chord in self.circle.chords():
+            if chord[1] == val:
+                type = chord[2]
+                break
+
+        if type == 'd':
+            type = 'dim'
+
+        chord = Chord(Note(val), type)
+        print(chord.notes)
+
+        if PLAYSOUNDS:
+            play_chord(chord.notes)
+
 
     def findKey(self):
         if self.chordsInKey:

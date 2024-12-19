@@ -1,4 +1,4 @@
-from PyQt5 import QtWidgets
+from PyQt5 import QtWidgets, QtGui
 from PyQt5.QtCore import *
 
 class myLabel(QtWidgets.QLabel):
@@ -6,6 +6,13 @@ class myLabel(QtWidgets.QLabel):
         super().__init__(parent)
 
     clicked = pyqtSignal()
+    play = pyqtSignal()
 
     def mousePressEvent(self, event):
-        self.clicked.emit()
+        modifiers = QtGui.QGuiApplication.keyboardModifiers()
+        if modifiers & Qt.ShiftModifier:
+            pass
+        elif modifiers & Qt.ControlModifier:
+            self.play.emit()
+        else:
+            self.clicked.emit()
