@@ -448,7 +448,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def setkey(self, key):
         if self.first:
             self.first = False
-            self.statusbar.showMessage('"m" switches between Major and Minor modes. Try space, "p", and arrow keys.', 10000)
+            self.statusbar.showMessage('"m" switches between Major and Minor modes. Try space, "p", and arrow keys. Try Ctrl- and Shift-clicking for sound output.', 20000)
 
         # Set the key label in the upper left corner to the selected key.
         self.keyLabel.setText(translate(key))
