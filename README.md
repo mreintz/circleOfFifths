@@ -1,11 +1,12 @@
 # circleOfFifths
 Simple Circle of Fifths application. Works on both Windows and Linux.
 
-NEW FEATURE! Find key from chords.
+<b>NEW FEATURE! Ctrl-click to play chords, Shift-click to play notes, Ctrl+Shift-click to play arpeggios.</b>
 
 Requires:
 - PyQt5==5.15.1
 - musthe==1.0.0
+- tinysoundfont==0.3.6 (if you want sound output support)
 
 Can be built into a single executable binary using:
 - pyinstaller @ https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
