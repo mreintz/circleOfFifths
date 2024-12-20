@@ -7,8 +7,9 @@ Requires:
 - PyQt5==5.15.1
 - musthe==1.0.0
 - tinysoundfont==0.3.6 (if you want sound output support)
+- PyAudio==0.2.14 (if you want sound output support)
 
-Uses the https://nwhitehead.github.io/tinysoundfont-pybind/guide.html library and default sound font.
+Uses the https://nwhitehead.github.io/tinysoundfont-pybind/guide.html library and default sound font. 
 
 Can be built into a single executable binary using:
 - pyinstaller @ https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
