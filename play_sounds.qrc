@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="resources">
+    <file>florestan-piano.sf2</file>
+  </qresource>
+</RCC>
