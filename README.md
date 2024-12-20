@@ -8,6 +8,8 @@ Requires:
 - musthe==1.0.0
 - tinysoundfont==0.3.6 (if you want sound output support)
 
+Uses the https://nwhitehead.github.io/tinysoundfont-pybind/guide.html library and default sound font.
+
 Can be built into a single executable binary using:
 - pyinstaller @ https://github.com/pyinstaller/pyinstaller/archive/develop.tar.gz
 - pyinstaller-hooks-contrib==2020.9
