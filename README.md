@@ -9,6 +9,8 @@ Requires:
 - tinysoundfont==0.3.6 (if you want sound output support)
 - PyAudio==0.2.14 (if you want sound output support)
 
+PyAudio might have som requirements. On my Linux box I needed to install portaudio19-dev on the base system in order to compile the wheel for pyaudio.
+
 Uses the https://nwhitehead.github.io/tinysoundfont-pybind/guide.html library and default sound font. 
 
 Can be built into a single executable binary using:
