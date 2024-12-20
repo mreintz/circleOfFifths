@@ -176,8 +176,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         for l in self.labels:
             l.clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.setkey(val))
-            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, note=False))
-            l.note.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, note=True))
+            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'chord'))
+            l.note.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'note'))
+            l.arpeggio.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'arpeggio'))
 
         self.SharpFlatLabel.clicked.connect(self.findKey)
 
@@ -189,7 +190,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.findWindow = None
         self.setkey(self.key)
 
-    def play(self, val, note):
+    def play(self, val, sound_type):
         if self.chordsInKey:
             type = 'M'
             for chord in self.circle.chords():
@@ -205,14 +206,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         else:
             chord = self.chord
 
-        if note:
+        if sound_type=='note':
             single_note = Note(val)
 
         if play_sounds:
-            if note:
+            if sound_type=='note':
                 play_chord([ single_note ])
-            else:
+            elif sound_type=='chord':
                 play_chord(chord.notes)
+            else:
+                play_arpeggio(chord.notes)
 
 
     def findKey(self):

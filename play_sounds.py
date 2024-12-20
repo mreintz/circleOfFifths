@@ -22,7 +22,7 @@ def play_arpeggio(notes):
     midi_notes = [ n.midi_note() for n in notes ]
     for n in midi_notes:
         synth.noteon(0, n, 100)
-        time.sleep(0.5)
+        time.sleep(0.3)
         synth.noteoff(0, n)
 
 def play_chord(notes):
