@@ -6,7 +6,7 @@ from PyQt5.QtCore import QFile
 import play_sounds_resources
 
 synthfilename = "florestan-piano.sf2"
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+__location__ = os.getcwd() #os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
 synthfile = os.path.join(__location__, synthfilename)
 
 if not os.path.isfile(synthfile):
