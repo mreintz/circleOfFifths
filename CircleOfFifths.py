@@ -204,9 +204,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 chord_type = 'dim'
             chord = Chord(Note(rootnote), chord_type)
             if sound_type=='clicked':
-                play_chord(chord.notes)
-            elif sound_type=='right_clicked':
                 play_chord([ Note(rootnote) ])
+            elif sound_type=='right_clicked':
+                play_chord(chord.notes)
             elif sound_type=='shift_clicked':
                 play_arpeggio(chord.notes)
         else:
