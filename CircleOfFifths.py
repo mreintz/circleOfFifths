@@ -176,9 +176,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         for l in self.labels:
             l.clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.setkey(val))
-            l.play.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'chord'))
-            l.note.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'note'))
-            l.arpeggio.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'arpeggio'))
+            l.right_clicked.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'chord'))
+            l.control.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'note'))
+            l.shift.connect(lambda val=self.c0[self.labels.index(l)]: self.play(val, 'arpeggio'))
+
+        for i, l in enumerate(self.chordPrintLabels):
+            l.clicked.connect(lambda val=i: self.play_scale(val, 'clicked'))
+            l.right_clicked.connect(lambda val=i: self.play_scale(val, 'right_clicked'))
+            l.shift.connect(lambda val=i: self.play_scale(val, 'shift_clicked'))
 
         self.SharpFlatLabel.clicked.connect(self.findKey)
 
@@ -189,6 +194,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.findWindow = None
         self.setkey(self.key)
+
+    def play_scale(self, val, sound_type='chord'):
+        if self.chordsInKey:
+            chord = self.circle.chords()[val]
+            rootnote = chord[1]
+            chord_type = chord[2]
+            if chord_type == 'd':
+                chord_type = 'dim'
+            chord = Chord(Note(rootnote), chord_type)
+            if sound_type=='clicked':
+                play_chord(chord.notes)
+            elif sound_type=='right_clicked':
+                play_chord([ Note(rootnote) ])
+            elif sound_type=='shift_clicked':
+                play_arpeggio(chord.notes)
+        else:
+            notes = [ Note(n[1]) for n in self.notesInChord ]
+            note = Scale(Note(self.key), name = self.mapChordToScale())[val]
+            if sound_type=='clicked':
+                play_chord([ note ])
+            elif sound_type=='right_clicked':
+                play_chord( notes )
+            elif sound_type=='shift_clicked':
+                play_arpeggio( notes )
+
 
     def play(self, val, sound_type):
         if self.chordsInKey:
