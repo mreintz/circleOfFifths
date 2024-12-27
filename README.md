@@ -1,7 +1,7 @@
 # circleOfFifths
 Simple Circle of Fifths application. Works on both Windows and Linux.
 
-<b>NEW FEATURE! Ctrl-click to play chords, Shift-click to play notes, Ctrl+Shift-click to play arpeggios.</b>
+<b>NEW FEATURE! Right click to play chords, Ctrl+click to play notes, Shift-click to play arpeggios.</b>
 
 Requires:
 - PyQt5==5.15.1
@@ -10,6 +10,8 @@ Requires:
 - PyAudio==0.2.14 (if you want sound output support)
 
 PyAudio might have som requirements. On my Linux box I needed to install portaudio19-dev on the base system in order to compile the wheel for pyaudio.
+
+Please note that you don't need to install anything if you run the binaries under Releases.
 
 Uses the https://nwhitehead.github.io/tinysoundfont-pybind/guide.html library and default sound font. 
 
