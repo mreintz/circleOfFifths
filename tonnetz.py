@@ -158,9 +158,9 @@ class IsoGridScene(QGraphicsScene):
             # Deselect if already selected
             self.selected_triangles.remove(tri_set)
         elif expand and self.selected_triangles:
-            # Expand if adjacent to any selected triangle
+            # Expand if at least one apex is shared with any selected triangle
             for sel_tri in self.selected_triangles:
-                if len(sel_tri & tri_set) == 2:
+                if len(sel_tri & tri_set) >= 1:
                     self.selected_triangles.add(tri_set)
                     break
             else:
